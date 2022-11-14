@@ -11,7 +11,7 @@ export default function Container({ children, padding }: ContainerProps) {
       padding={padding}
       maxWidth={450}
       backgroundColor="#F9FAFC"
-      height="100vh"
+      minHeight="100vh"
       marginX="auto"
       textAlign="center"
     >

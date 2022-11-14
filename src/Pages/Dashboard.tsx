@@ -1,11 +1,11 @@
 import { Heading, Pane } from "evergreen-ui";
-import Container from "../Components/Container";
 import CrashLog from "../Components/Dashboard/CrashLog";
 import Welcome from "../Components/Dashboard/Welcome";
+import Layout from "../Components/Layout";
 
 export default function Dashboard() {
   return (
-    <Container>
+    <Layout>
       <Heading size="800" paddingTop={20}>
         Dashboard
       </Heading>
@@ -13,6 +13,6 @@ export default function Dashboard() {
         <Welcome />
         <CrashLog />
       </Pane>
-    </Container>
+    </Layout>
   );
 }
