@@ -28,7 +28,7 @@ export default function Layout({ children }: LayoutProps) {
             <Heading size={800}>Artismin</Heading>
           </ListItem>
           <ListItem>
-            <Link to="/dashbord">Home</Link>
+            <Link to="/dashboard">Home</Link>
           </ListItem>
           <ListItem>
             <Link to="/channels">Configure Channels</Link>

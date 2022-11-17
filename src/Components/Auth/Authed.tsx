@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import shallow from "zustand/shallow";
 import { useAuthStore } from "../../Store/AuthStore";
+import Loading from "../Loading";
 
 export default function Authed() {
   const navigate = useNavigate();
@@ -15,10 +16,14 @@ export default function Authed() {
   }, []);
 
   useEffect(() => {
-    if (!isAuthed) {
+    if (!isAuthed && isAuthed !== null) {
       navigate("/login");
     }
   }, [isAuthed]);
+
+  if (isAuthed === null) {
+    return <Loading />;
+  }
 
   return <Outlet />;
 }

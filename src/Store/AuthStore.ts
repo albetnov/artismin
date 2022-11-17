@@ -14,7 +14,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 
 interface AuthStoreProps {
-  isAuthed: boolean;
+  isAuthed: boolean | null;
   login: (email: string, password: string) => void;
   logout: () => void;
   hasError: boolean;
@@ -23,7 +23,7 @@ interface AuthStoreProps {
 }
 
 export const useAuthStore = create<AuthStoreProps>((set) => ({
-  isAuthed: getAuth(app)?.currentUser !== null,
+  isAuthed: null,
   hasError: false,
   checkForAuth() {
     const auth = getAuth(app);
