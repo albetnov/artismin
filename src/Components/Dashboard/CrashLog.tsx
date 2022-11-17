@@ -1,9 +1,10 @@
-import { Dialog, Table, Text } from "evergreen-ui";
+import { Table, Text } from "evergreen-ui";
 import Card from "../Card";
 import { useEffect, useState } from "react";
 import LogRepository from "../../Repositories/LogRepository";
 import { DocumentData } from "firebase/firestore";
 import Loading from "../Loading";
+import BasicModal from "../BasicModal";
 
 export default function CrashLog() {
   const [logs, setLogs] = useState<DocumentData[]>([]);
@@ -28,12 +29,10 @@ export default function CrashLog() {
     <Card>
       <Text>Latest Crash Log</Text>
       <br />
-      <Dialog
+      <BasicModal
         isShown={openDetail}
         title="Exception Detail"
         onCloseComplete={() => setOpenDetail(false)}
-        hasCancel={false}
-        confirmLabel="Close"
       >
         {details ? (
           <>
@@ -44,7 +43,7 @@ export default function CrashLog() {
         ) : (
           <Loading />
         )}
-      </Dialog>
+      </BasicModal>
       {logs.length <= 0 ? (
         <Loading />
       ) : (

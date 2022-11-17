@@ -1,0 +1,5 @@
+import { Dialog, DialogProps } from "evergreen-ui";
+
+export default function BasicModal(props: DialogProps) {
+  return <Dialog {...props} hasCancel={false} confirmLabel="Close" />;
+}
