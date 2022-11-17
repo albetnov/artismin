@@ -1,3 +1,4 @@
+import { addDoc, collection } from "firebase/firestore";
 import BaseRepository from "./BaseRepository";
 
 export default class ChannelRepository extends BaseRepository {
@@ -9,6 +10,13 @@ export default class ChannelRepository extends BaseRepository {
         id: item.id,
         ...item.data(),
       };
+    });
+  }
+
+  async createChannel(name: string, value: string): Promise<void> {
+    await addDoc(collection(this.db, this.table), {
+      name,
+      value,
     });
   }
 }

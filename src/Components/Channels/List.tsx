@@ -22,7 +22,7 @@ export default function List({ data }: ListProps) {
       </Table.Head>
       <Table.Body>
         {data.map((item: DocumentData, no: number) => (
-          <Table.Row id={item.id}>
+          <Table.Row key={item.id}>
             <Table.TextCell>{++no}</Table.TextCell>
             <Table.TextCell>{item.name}</Table.TextCell>
             <Table.TextCell>{item.value}</Table.TextCell>
