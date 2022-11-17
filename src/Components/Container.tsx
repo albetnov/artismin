@@ -9,7 +9,6 @@ export default function Container({ children, padding }: ContainerProps) {
   return (
     <Pane
       padding={padding}
-      maxWidth={450}
       backgroundColor="#F9FAFC"
       minHeight="100vh"
       marginX="auto"

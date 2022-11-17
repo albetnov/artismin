@@ -1,8 +1,7 @@
-import { Pane, Text } from "evergreen-ui";
+import { Heading, ListItem, Pane, Text, UnorderedList } from "evergreen-ui";
 import React from "react";
-import { MdHome } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Container from "./Container";
-import FooterMenu from "./FooterMenu";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +10,34 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <Container>
+      <Pane>
+        <UnorderedList
+          display="flex"
+          flexDirection="row"
+          gap={20}
+          alignItems="center"
+          listStyle="none"
+          backgroundColor="#ffffff"
+          padding={20}
+          width="90%"
+          marginX="auto"
+          borderRadius={20}
+          boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
+        >
+          <ListItem>
+            <Heading size={800}>Artismin</Heading>
+          </ListItem>
+          <ListItem>
+            <Link to="/dashbord">Home</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/channels">Configure Channels</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/logout">Logout</Link>
+          </ListItem>
+        </UnorderedList>
+      </Pane>
       <Pane
         display="flex"
         minHeight="100vh"
@@ -21,20 +48,15 @@ export default function Layout({ children }: LayoutProps) {
         {children}
         <Pane
           backgroundColor="#F4F5F9"
-          padding={20}
+          padding={15}
           borderRadius={15}
-          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-          marginBottom={20}
           marginX="auto"
-          display="flex"
-          flexDirection="row"
-          gap={30}
-          justifyContent="space-between"
-          width="90%"
+          marginTop={10}
+          textAlign="center"
+          width="100%"
         >
-          <FooterMenu icon={<MdHome fontSize={30} />} text="Home" href="/dashboard" />
-          <FooterMenu icon={<MdHome fontSize={30} />} text="Home" href="/dashboard" />
-          <FooterMenu icon={<MdHome fontSize={30} />} text="Home" href="/dashboard" />
+          &copy; {new Date().getFullYear()} - Artismin by{" "}
+          <a href="https://github.com/albetnov">Albet Novendo</a>
         </Pane>
       </Pane>
     </Container>

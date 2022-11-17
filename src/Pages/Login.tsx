@@ -1,4 +1,4 @@
-import { Heading, Text, Card, TextInputField, Button, Alert } from "evergreen-ui";
+import { Heading, Text, Card, TextInputField, Button, Alert, Pane } from "evergreen-ui";
 import { useEffect, FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../Store/AuthStore";
@@ -22,6 +22,7 @@ export default function Login() {
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     checkForAuth();
@@ -40,7 +41,7 @@ export default function Login() {
     }
   }, [hasError]);
 
-  const loginHandler = (event: FormEvent) => {
+  const loginHandler = async (event: FormEvent) => {
     event.preventDefault();
 
     const userEmail = emailRef.current!.value;
@@ -51,7 +52,9 @@ export default function Login() {
       return;
     }
 
-    login(userEmail, userPassword);
+    setIsLoading(true);
+    await login(userEmail, userPassword);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -69,40 +72,42 @@ export default function Login() {
 
   return (
     <Container padding={15}>
-      <Heading size={700}>Artismin - Admin Dashboard for Artisans.</Heading>
-      <Text>Welcome back. Please enter you cresidentials.</Text>
-      <Card
-        marginTop={100}
-        boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
-        paddingX={10}
-        paddingY={20}
-        textAlign="left"
-      >
-        {alert && (
-          <Alert intent="warning" marginY={10}>
-            {alert}
-          </Alert>
-        )}
-        <form onSubmit={loginHandler}>
-          <TextInputField
-            label="Email Address"
-            labelFor="email"
-            hint="Please enter your email address"
-            isRequired
-            type="email"
-            ref={emailRef}
-          />
-          <TextInputField
-            label="Password"
-            labelFor="password"
-            hint="Please enter your password"
-            type="password"
-            isRequired
-            ref={passwordRef}
-          />
-          <Button>Login</Button>
-        </form>
-      </Card>
+      <Pane maxWidth={450} marginX="auto">
+        <Heading size={700}>Artismin - Admin Dashboard for Artisans.</Heading>
+        <Text>Welcome back. Please enter you cresidentials.</Text>
+        <Card
+          marginTop={100}
+          boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
+          paddingX={10}
+          paddingY={20}
+          textAlign="left"
+        >
+          {alert && (
+            <Alert intent="warning" marginY={10}>
+              {alert}
+            </Alert>
+          )}
+          <form onSubmit={loginHandler}>
+            <TextInputField
+              label="Email Address"
+              hint="Please enter your email address"
+              required
+              type="email"
+              ref={emailRef}
+              autoComplete="email"
+            />
+            <TextInputField
+              label="Password"
+              hint="Please enter your password"
+              type="password"
+              required
+              ref={passwordRef}
+              autoComplete="current-password"
+            />
+            <Button isLoading={isLoading}>Login</Button>
+          </form>
+        </Card>
+      </Pane>
     </Container>
   );
 }
