@@ -4,6 +4,7 @@ import Logout from "../Components/Auth/Logout";
 import Channels from "../Pages/Channels";
 import Dashboard from "../Pages/Dashboard";
 import Login from "../Pages/Login";
+import Roadmap from "../Pages/Roadmap";
 
 export default createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export default createBrowserRouter([
       {
         path: "channels",
         element: <Channels />,
+      },
+      {
+        path: "roadmap",
+        element: <Roadmap />,
       },
     ],
   },

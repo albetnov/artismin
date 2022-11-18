@@ -1,17 +1,17 @@
-import { Alert, Dialog, TextInputField } from "evergreen-ui";
 import { useRef, useState } from "react";
 import ChannelRepository from "../../Repositories/ChannelRepository";
-import { CreateProps } from "../../Utils/CreateProps";
+import { Alert, Dialog, TextInputField } from "evergreen-ui";
 import Loading from "../Loading";
+import { EditProps } from "../../Utils/EditProps";
 
-export default function Create({ show, setShow, refetch }: CreateProps) {
+export default function Edit({ show, setShow, fetchChannel, item }: EditProps) {
   const nameRef = useRef<HTMLInputElement>(null);
   const idRef = useRef<HTMLInputElement>(null);
   const [alert, setAlert] = useState<boolean | string>(false);
   const [loading, setLoading] = useState(false);
 
-  const createChannelHandler = async () => {
-    if (loading) return;
+  const editChannelHandler = async () => {
+    if (loading || !item) return;
 
     setAlert(false);
     const idInput = idRef.current!.value;
@@ -22,8 +22,8 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
     }
 
     setLoading(true);
-    await new ChannelRepository().createChannel(nameInput, idInput);
-    await refetch();
+    await new ChannelRepository().editChannel(item.id, nameInput, idInput);
+    await fetchChannel();
     setLoading(false);
 
     setShow(false);
@@ -32,12 +32,12 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
   return (
     <Dialog
       isShown={show}
-      title="Create Channel"
-      onConfirm={createChannelHandler}
+      title="Edit Channel"
+      onConfirm={editChannelHandler}
       onCloseComplete={() => setShow(false)}
     >
       {alert && <Alert intent="danger">{alert}</Alert>}
-      {loading ? (
+      {loading || !item ? (
         <Loading />
       ) : (
         <>
@@ -47,6 +47,7 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
             required
             type="text"
             ref={nameRef}
+            defaultValue={item.name}
           />
           <TextInputField
             label="Channel ID"
@@ -54,6 +55,7 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
             required
             type="text"
             ref={idRef}
+            defaultValue={item.value}
           />
         </>
       )}

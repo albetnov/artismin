@@ -1,10 +1,9 @@
-import { Button, Heading, Text } from "evergreen-ui";
+import { Button } from "evergreen-ui";
 import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import Card from "../Components/Card";
 import Create from "../Components/Channels/Create";
 import List from "../Components/Channels/List";
-import Layout from "../Components/Layout";
+import CommonPageBase from "../Components/CommonPageBase";
 import ChannelRepository from "../Repositories/ChannelRepository";
 
 export default function Channels() {
@@ -21,17 +20,13 @@ export default function Channels() {
   }, []);
 
   return (
-    <Layout>
-      <Card>
-        <Heading size={600}>Manage Channels</Heading>
-        <Text>Register Channel to bot kernels.</Text> <br />
-        <Button marginY={10} onClick={() => setShowCreate(true)}>
-          Add Channel
-        </Button>
-        <Create show={showCreate} fetchChannel={fetchChannel} setShow={setShowCreate} />
-        <hr />
-        <List data={channels} fetchChannel={fetchChannel} />
-      </Card>
-    </Layout>
+    <CommonPageBase heading="Manage Channels" description="Register channel to bot kernels.">
+      <Button marginY={10} onClick={() => setShowCreate(true)}>
+        Add Channel
+      </Button>
+      <Create show={showCreate} refetch={fetchChannel} setShow={setShowCreate} />
+      <hr />
+      <List data={channels} fetchChannel={fetchChannel} />
+    </CommonPageBase>
   );
 }

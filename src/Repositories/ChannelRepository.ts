@@ -1,4 +1,3 @@
-import { addDoc, collection } from "firebase/firestore";
 import BaseRepository from "./BaseRepository";
 
 export default class ChannelRepository extends BaseRepository {
