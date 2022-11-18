@@ -40,6 +40,9 @@ export default function Layout({ children }: LayoutProps) {
             <Link to="/roles">Manage Roles</Link>
           </ListItem>
           <ListItem>
+            <Link to="/rules">Manage Rules</Link>
+          </ListItem>
+          <ListItem>
             <Link to="/logout">Logout</Link>
           </ListItem>
         </UnorderedList>

@@ -6,6 +6,7 @@ import Dashboard from "../Pages/Dashboard";
 import Login from "../Pages/Login";
 import Roadmap from "../Pages/Roadmap";
 import Roles from "../Pages/Roles";
+import Rules from "../Pages/Rules";
 
 export default createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export default createBrowserRouter([
       {
         path: "roles",
         element: <Roles />,
+      },
+      {
+        path: "rules",
+        element: <Rules />,
       },
     ],
   },

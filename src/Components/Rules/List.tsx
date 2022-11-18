@@ -6,7 +6,7 @@ import { MouseEvent, useState } from "react";
 import Edit from "./Edit";
 import Detail from "./Detail";
 import { ListProps } from "../../Utils/ListProps";
-import RoleRepository from "../../Repositories/RoleRepository";
+import RuleRepository from "../../Repositories/RuleRepository";
 
 export default function List({ data, refetch }: ListProps) {
   const [loading, setLoading] = useState(false);
@@ -18,19 +18,19 @@ export default function List({ data, refetch }: ListProps) {
     return <Loading />;
   }
 
-  const deleteRoleHandler = async (id: string) => {
+  const deleteRuleHandler = async (id: string) => {
     setLoading(true);
-    await new RoleRepository().delete(id);
+    await new RuleRepository().delete(id);
     await refetch();
     setLoading(false);
   };
 
-  const editRoleHandler = (id: number) => {
+  const editRuleHandler = (id: number) => {
     setCurrent(data[id]);
     setOpenEdit(true);
   };
 
-  const detailRoleHandler = async (id: number) => {
+  const detailRuleHandler = async (id: number) => {
     setCurrent(data[id]);
     setOpenDetail(true);
   };
@@ -41,21 +41,21 @@ export default function List({ data, refetch }: ListProps) {
       <Detail item={current} show={openDetail} setShow={setOpenDetail} />
       <Table.Head>
         <Table.TextHeaderCell>No</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Role Name</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Role ID</Table.TextHeaderCell>
+        <Table.TextHeaderCell>Title</Table.TextHeaderCell>
+        <Table.TextHeaderCell>Content</Table.TextHeaderCell>
         <Table.TextHeaderCell>Action</Table.TextHeaderCell>
       </Table.Head>
       <Table.Body>
         {data.map((item: DocumentData, no: number) => (
-          <Table.Row key={item.id} isSelectable onSelect={() => detailRoleHandler(no - 1)}>
+          <Table.Row key={item.id} isSelectable onSelect={() => detailRuleHandler(no - 1)}>
             <Table.TextCell>{++no}</Table.TextCell>
             <Table.TextCell>{item.name}</Table.TextCell>
             <Table.TextCell>{item.value}</Table.TextCell>
             <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
-              <Button onClick={() => editRoleHandler(no - 1)}>
+              <Button onClick={() => editRuleHandler(no - 1)}>
                 <FiEdit fontSize={70} />
               </Button>
-              <Button intent="danger" onClick={() => deleteRoleHandler(item.id)}>
+              <Button intent="danger" onClick={() => deleteRuleHandler(item.id)}>
                 <FiTrash fontSize={70} />
               </Button>
             </Table.Cell>
