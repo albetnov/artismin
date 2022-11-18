@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Authed from "../Components/Auth/Authed";
 import Logout from "../Components/Auth/Logout";
 import Channels from "../Pages/Channels";
@@ -10,6 +10,10 @@ export default createBrowserRouter([
     path: "*",
     element: <Authed />,
     children: [
+      {
+        path: "",
+        element: <Navigate to="/dashboard" />,
+      },
       {
         path: "dashboard",
         element: <Dashboard />,

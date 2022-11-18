@@ -14,9 +14,10 @@ export default class ChannelRepository extends BaseRepository {
   }
 
   async createChannel(name: string, value: string): Promise<void> {
-    await addDoc(collection(this.db, this.table), {
-      name,
-      value,
-    });
+    await this.create({ name, value });
+  }
+
+  async editChannel(id: string, name: string, value: string): Promise<void> {
+    await this.edit(id, { name, value });
   }
 }

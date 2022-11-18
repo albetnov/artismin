@@ -11,11 +11,12 @@ export default function Channels() {
   const [channels, setChannels] = useState<DocumentData[]>([]);
   const [showCreate, setShowCreate] = useState(false);
 
+  const fetchChannel = async () => {
+    const channels = new ChannelRepository();
+    setChannels(await channels.getChannel());
+  };
+
   useEffect(() => {
-    const fetchChannel = async () => {
-      const channels = new ChannelRepository();
-      setChannels(await channels.getChannel());
-    };
     fetchChannel();
   }, []);
 
@@ -27,9 +28,9 @@ export default function Channels() {
         <Button marginY={10} onClick={() => setShowCreate(true)}>
           Add Channel
         </Button>
-        <Create show={showCreate} setShow={setShowCreate} />
+        <Create show={showCreate} fetchChannel={fetchChannel} setShow={setShowCreate} />
         <hr />
-        <List data={channels} />
+        <List data={channels} fetchChannel={fetchChannel} />
       </Card>
     </Layout>
   );
