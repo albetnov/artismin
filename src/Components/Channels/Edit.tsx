@@ -4,7 +4,7 @@ import { Alert, Dialog, TextInputField } from "evergreen-ui";
 import Loading from "../Loading";
 import { EditProps } from "../../Utils/EditProps";
 
-export default function Edit({ show, setShow, fetchChannel, item }: EditProps) {
+export default function Edit({ show, setShow, refetch, item }: EditProps) {
   const nameRef = useRef<HTMLInputElement>(null);
   const idRef = useRef<HTMLInputElement>(null);
   const [alert, setAlert] = useState<boolean | string>(false);
@@ -23,7 +23,7 @@ export default function Edit({ show, setShow, fetchChannel, item }: EditProps) {
 
     setLoading(true);
     await new ChannelRepository().editChannel(item.id, nameInput, idInput);
-    await fetchChannel();
+    await refetch();
     setLoading(false);
 
     setShow(false);

@@ -26,7 +26,7 @@ export default function Channels() {
       </Button>
       <Create show={showCreate} refetch={fetchChannel} setShow={setShowCreate} />
       <hr />
-      <List data={channels} fetchChannel={fetchChannel} />
+      <List data={channels} refetch={fetchChannel} />
     </CommonPageBase>
   );
 }

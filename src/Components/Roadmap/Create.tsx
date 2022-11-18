@@ -15,7 +15,7 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
   const [alert, setAlert] = useState<boolean | string>(false);
   const [loading, setLoading] = useState(false);
 
-  const createChannelHandler = async () => {
+  const createRoadmapHandler = async () => {
     if (loading) return;
 
     setAlert(false);
@@ -55,8 +55,8 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
   return (
     <Dialog
       isShown={show}
-      title="Create Channel"
-      onConfirm={createChannelHandler}
+      title="Create Roadmap"
+      onConfirm={createRoadmapHandler}
       onCloseComplete={() => setShow(false)}
     >
       {alert && <Alert intent="danger">{alert}</Alert>}

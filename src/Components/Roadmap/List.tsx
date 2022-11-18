@@ -3,12 +3,12 @@ import { DocumentData } from "firebase/firestore";
 import Loading from "../Loading";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { MouseEvent, useState } from "react";
-import ChannelRepository from "../../Repositories/ChannelRepository";
 import Edit from "./Edit";
 import Detail from "./Detail";
 import { ListProps } from "../../Utils/ListProps";
+import RoadmapRepository from "../../Repositories/RoadmapRepository";
 
-export default function List({ data, fetchChannel }: ListProps) {
+export default function List({ data, refetch }: ListProps) {
   const [loading, setLoading] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDetail, setOpenDetail] = useState(false);
@@ -18,44 +18,46 @@ export default function List({ data, fetchChannel }: ListProps) {
     return <Loading />;
   }
 
-  const deleteChannelHandler = async (id: string) => {
+  const deleteRoadmapHandler = async (id: string) => {
     setLoading(true);
-    await new ChannelRepository().delete(id);
-    await fetchChannel();
+    await new RoadmapRepository().delete(id);
+    await refetch();
     setLoading(false);
   };
 
-  const editChannelHandler = (id: number) => {
+  const editRoadmapHandler = (id: number) => {
     setCurrent(data[id]);
     setOpenEdit(true);
   };
 
-  const detailChannelHandler = async (id: number) => {
+  const detailRoadmapHandler = async (id: number) => {
     setCurrent(data[id]);
     setOpenDetail(true);
   };
 
   return (
-    <Table>
-      <Edit fetchChannel={fetchChannel} item={current} setShow={setOpenEdit} show={openEdit} />
+    <Table maxWidth="full">
+      <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
       <Detail item={current} show={openDetail} setShow={setOpenDetail} />
       <Table.Head>
         <Table.TextHeaderCell>No</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Channel Name</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Channel ID</Table.TextHeaderCell>
+        <Table.TextHeaderCell>Author Name</Table.TextHeaderCell>
+        <Table.TextHeaderCell>Author URL</Table.TextHeaderCell>
+        <Table.TextHeaderCell>Title</Table.TextHeaderCell>
         <Table.TextHeaderCell>Action</Table.TextHeaderCell>
       </Table.Head>
       <Table.Body>
         {data.map((item: DocumentData, no: number) => (
-          <Table.Row key={item.id} isSelectable onSelect={() => detailChannelHandler(no - 1)}>
+          <Table.Row key={item.id} isSelectable onSelect={() => detailRoadmapHandler(no - 1)}>
             <Table.TextCell>{++no}</Table.TextCell>
-            <Table.TextCell>{item.name}</Table.TextCell>
-            <Table.TextCell>{item.value}</Table.TextCell>
+            <Table.TextCell>{item.author_name}</Table.TextCell>
+            <Table.TextCell>{item.author_url}</Table.TextCell>
+            <Table.TextCell>{item.title}</Table.TextCell>
             <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
-              <Button onClick={() => editChannelHandler(no - 1)}>
+              <Button onClick={() => editRoadmapHandler(no - 1)}>
                 <FiEdit fontSize={50} />
               </Button>
-              <Button intent="danger" onClick={() => deleteChannelHandler(item.id)}>
+              <Button intent="danger" onClick={() => deleteRoadmapHandler(item.id)}>
                 <FiTrash fontSize={50} />
               </Button>
             </Table.Cell>

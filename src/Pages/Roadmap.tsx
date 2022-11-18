@@ -3,10 +3,11 @@ import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import CommonPageBase from "../Components/CommonPageBase";
 import Create from "../Components/Roadmap/Create";
+import List from "../Components/Roadmap/List";
 import RoadmapRepository from "../Repositories/RoadmapRepository";
 
 export default function Roadmap() {
-  const [roadmaps, setRoadmaps] = useState<DocumentData[]>();
+  const [roadmaps, setRoadmaps] = useState<DocumentData[]>([]);
   const [showCreate, setShowCreate] = useState(false);
 
   const fetchRoadmap = async () => {
@@ -24,6 +25,7 @@ export default function Roadmap() {
         Add Roadmap
       </Button>
       <Create show={showCreate} setShow={setShowCreate} refetch={fetchRoadmap} />
+      <List data={roadmaps} refetch={fetchRoadmap} />
     </CommonPageBase>
   );
 }

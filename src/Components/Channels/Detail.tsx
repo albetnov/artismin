@@ -4,7 +4,7 @@ import Loading from "../Loading";
 
 export default function Detail({ show, setShow, item }: DetailProps) {
   return (
-    <BasicModal isShown={show} title="Channel Detail" onCloseComplete={() => setShow(false)}>
+    <BasicModal isShown={show} title="Roadmap Detail" onCloseComplete={() => setShow(false)}>
       {item ? (
         <>
           <p>{item.name}</p>

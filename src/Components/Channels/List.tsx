@@ -8,7 +8,7 @@ import Edit from "./Edit";
 import Detail from "./Detail";
 import { ListProps } from "../../Utils/ListProps";
 
-export default function List({ data, fetchChannel }: ListProps) {
+export default function List({ data, refetch }: ListProps) {
   const [loading, setLoading] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDetail, setOpenDetail] = useState(false);
@@ -21,7 +21,7 @@ export default function List({ data, fetchChannel }: ListProps) {
   const deleteChannelHandler = async (id: string) => {
     setLoading(true);
     await new ChannelRepository().delete(id);
-    await fetchChannel();
+    await refetch();
     setLoading(false);
   };
 
@@ -37,7 +37,7 @@ export default function List({ data, fetchChannel }: ListProps) {
 
   return (
     <Table>
-      <Edit fetchChannel={fetchChannel} item={current} setShow={setOpenEdit} show={openEdit} />
+      <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
       <Detail item={current} show={openDetail} setShow={setOpenDetail} />
       <Table.Head>
         <Table.TextHeaderCell>No</Table.TextHeaderCell>
