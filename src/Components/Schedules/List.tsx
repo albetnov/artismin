@@ -43,7 +43,6 @@ export default function List({ data, refetch }: ListProps) {
         <Table.TextHeaderCell>No</Table.TextHeaderCell>
         <Table.TextHeaderCell>Title</Table.TextHeaderCell>
         <Table.TextHeaderCell>Channel ID</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Description</Table.TextHeaderCell>
         <Table.TextHeaderCell>Image URL</Table.TextHeaderCell>
         <Table.TextHeaderCell>Execute When</Table.TextHeaderCell>
         <Table.TextHeaderCell>Action</Table.TextHeaderCell>
@@ -54,7 +53,6 @@ export default function List({ data, refetch }: ListProps) {
             <Table.TextCell>{++no}</Table.TextCell>
             <Table.TextCell>{item.title}</Table.TextCell>
             <Table.TextCell>{item.channel_id}</Table.TextCell>
-            <Table.TextCell>{item.description}</Table.TextCell>
             <Table.TextCell>{item.image}</Table.TextCell>
             <Table.TextCell>{item.execute_when}</Table.TextCell>
             <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
