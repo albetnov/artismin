@@ -1,4 +1,4 @@
-import { Table, Text } from "evergreen-ui";
+import { Heading, Table } from "evergreen-ui";
 import Card from "../Card";
 import { useEffect, useState } from "react";
 import LogRepository from "../../Repositories/LogRepository";
@@ -27,7 +27,7 @@ export default function CrashLog() {
 
   return (
     <Card>
-      <Text>Latest Crash Log</Text>
+      <Heading>Latest Crash Log</Heading>
       <br />
       <BasicModal
         isShown={openDetail}

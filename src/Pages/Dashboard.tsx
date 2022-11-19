@@ -1,5 +1,6 @@
 import { Heading, Pane } from "evergreen-ui";
 import CrashLog from "../Components/Dashboard/CrashLog";
+import QuestionAnswer from "../Components/Dashboard/QuestionAnswer";
 import Welcome from "../Components/Dashboard/Welcome";
 import Layout from "../Components/Layout";
 
@@ -12,6 +13,7 @@ export default function Dashboard() {
       <Pane paddingX={10}>
         <Welcome />
         <CrashLog />
+        <QuestionAnswer />
       </Pane>
     </Layout>
   );
