@@ -7,6 +7,7 @@ import Login from "../Pages/Login";
 import Roadmap from "../Pages/Roadmap";
 import Roles from "../Pages/Roles";
 import Rules from "../Pages/Rules";
+import Scheduler from "../Pages/Scheduler";
 
 export default createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export default createBrowserRouter([
       {
         path: "rules",
         element: <Rules />,
+      },
+      {
+        path: "schedules",
+        element: <Scheduler />,
       },
     ],
   },

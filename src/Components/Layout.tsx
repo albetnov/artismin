@@ -37,10 +37,13 @@ export default function Layout({ children }: LayoutProps) {
             <Link to="/roadmap">Manage Roadmap</Link>
           </ListItem>
           <ListItem>
-            <Link to="/roles">Manage Roles</Link>
+            <Link to="/roles">Configure Roles</Link>
           </ListItem>
           <ListItem>
             <Link to="/rules">Manage Rules</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/schedules">Configure Schedules</Link>
           </ListItem>
           <ListItem>
             <Link to="/logout">Logout</Link>
