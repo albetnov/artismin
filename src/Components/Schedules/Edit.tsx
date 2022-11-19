@@ -35,9 +35,11 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
     };
 
     fetchChannel();
-    if (!item) return;
-    setChannel(item.channel_id);
   }, []);
+
+  useEffect(() => {
+    if (item) setChannel(item.channel_id);
+  }, [item]);
 
   const editScheduleHandler = async () => {
     if (loading || !item) return;

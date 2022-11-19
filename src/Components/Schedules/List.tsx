@@ -59,10 +59,10 @@ export default function List({ data, refetch }: ListProps) {
             <Table.TextCell>{item.execute_when}</Table.TextCell>
             <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
               <Button onClick={() => editScheduleHandler(no - 1)}>
-                <FiEdit fontSize={65} />
+                <FiEdit fontSize={15} />
               </Button>
               <Button intent="danger" onClick={() => deleteScheduleHandler(item.id)}>
-                <FiTrash fontSize={65} />
+                <FiTrash fontSize={15} />
               </Button>
             </Table.Cell>
           </Table.Row>
