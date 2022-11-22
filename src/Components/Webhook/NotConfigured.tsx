@@ -19,6 +19,7 @@ export default function NotConfigured() {
 
       const res = await checkForHealth(url);
       !res.ok && setAlert("Failed to connect.");
+      registerUrl(url);
       return true;
     } catch {
       setAlert("Failed to connect.");
@@ -46,9 +47,7 @@ export default function NotConfigured() {
       return;
     }
 
-    if (!revalidate(urlInput)) return;
-
-    registerUrl(urlInput);
+    revalidate(urlInput);
   };
 
   return (

@@ -1,9 +1,10 @@
-import { Button, Table, Text } from "evergreen-ui";
+import { Alert, Button, Checkbox, Dialog, Label, Table, Text } from "evergreen-ui";
 import { useState } from "react";
 import useAlert from "../../Hooks/useAlert";
 import { useWebhookStore } from "../../Store/WebhookStore";
 import { clearCache } from "../../Utils/Api";
 import BasicModal from "../BasicModal";
+import Loading from "../Loading";
 
 export default function ClearCache() {
   const [loading, setLoading] = useState(false);
@@ -13,13 +14,25 @@ export default function ClearCache() {
   }));
   const [data, setData] = useState("");
   const [modal, setModal] = useState(false);
+  const [body, setBody] = useState(false);
+
+  const [channels, setChannels] = useState(false);
+  const [roles, setRoles] = useState(false);
 
   const fetchHandler = async () => {
     try {
       resetAlert();
       setLoading(true);
       if (!webhookUrl) throw new Error();
-      const res = await clearCache(webhookUrl);
+      let res;
+      if (!channels && !roles) {
+        res = await clearCache(webhookUrl);
+      } else {
+        res = await clearCache(webhookUrl, {
+          channels: channels,
+          roles: roles,
+        });
+      }
       if (!res.ok) throw new Error();
       setData(await res.text());
       changeAlert("Success!", "success");
@@ -27,6 +40,7 @@ export default function ClearCache() {
       changeAlert("failed.", "danger");
     } finally {
       setLoading(false);
+      setBody(false);
     }
   };
 
@@ -35,9 +49,27 @@ export default function ClearCache() {
       <BasicModal isShown={modal} title="Detail Response" onCloseComplete={() => setModal(false)}>
         {data ? data : <Text>Please hit a request first.</Text>}
       </BasicModal>
+      <Dialog
+        isShown={body}
+        title="Request Fields"
+        onConfirm={fetchHandler}
+        onCloseComplete={() => setBody(false)}
+      >
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Alert>Unchecking both simply clearing all.</Alert>
+            <Label>Clear channel only?</Label>
+            <Checkbox onChange={() => setChannels((prev) => !prev)} checked={channels} />
+            <Label>Clear Roles only?</Label>
+            <Checkbox onChange={() => setRoles((prev) => !prev)} checked={roles} />
+          </>
+        )}
+      </Dialog>
       <Table.TextCell>/api/refreshCache</Table.TextCell>
       <Table.TextCell>
-        <Button isLoading={loading} onClick={fetchHandler}>
+        <Button isLoading={loading} onClick={() => setBody(true)}>
           Refresh Cache
         </Button>
       </Table.TextCell>

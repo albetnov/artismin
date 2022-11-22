@@ -54,13 +54,18 @@ export const ping = async (baseUrl: string) => {
   return await fetch(await urlBuilder(baseUrl, "ping"), headerBuilder);
 };
 
-export const clearCache = async (baseUrl: string) => {
+interface ClearCacheOptions {
+  channels: boolean;
+  roles: boolean;
+}
+
+export const clearCache = async (baseUrl: string, options?: ClearCacheOptions) => {
   return await fetch(await urlBuilder(baseUrl, "refreshCache"), {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
     method: "POST",
-    body: "{}",
+    body: options ? JSON.stringify(options) : "{}",
   });
 };
