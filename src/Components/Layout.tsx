@@ -46,6 +46,9 @@ export default function Layout({ children }: LayoutProps) {
             <Link to="/schedules">Configure Schedules</Link>
           </ListItem>
           <ListItem>
+            <Link to="/webhook">Webhook</Link>
+          </ListItem>
+          <ListItem>
             <Link to="/logout">Logout</Link>
           </ListItem>
         </UnorderedList>

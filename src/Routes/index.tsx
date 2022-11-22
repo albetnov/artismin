@@ -8,6 +8,7 @@ import Roadmap from "../Pages/Roadmap";
 import Roles from "../Pages/Roles";
 import Rules from "../Pages/Rules";
 import Scheduler from "../Pages/Scheduler";
+import Webhook from "../Pages/Webhook";
 
 export default createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export default createBrowserRouter([
       {
         path: "schedules",
         element: <Scheduler />,
+      },
+      {
+        path: "webhook",
+        element: <Webhook />,
       },
     ],
   },
