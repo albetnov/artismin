@@ -11,6 +11,7 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
   const footerRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
+  const idRef = useRef<HTMLInputElement>(null);
 
   const [alert, setAlert] = useState<boolean | string>(false);
   const [loading, setLoading] = useState(false);
@@ -25,20 +26,23 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
     const footerInput = footerRef.current!.value;
     const imageInput = imageRef.current!.value;
     const titleInput = titleRef.current!.value;
+    const idInput = idRef.current!.value;
     if (
       !authorNameInput ||
       !authorUrlInput ||
       !contentInput ||
       !footerInput ||
       !imageInput ||
-      !titleInput
+      !titleInput ||
+      !idInput
     ) {
       setAlert("Invalid inputs");
       return;
     }
 
     setLoading(true);
-    await new RoadmapRepository().createRoadmap(
+    const result = await new RoadmapRepository().createRoadmap(
+      idInput,
       authorNameInput,
       authorUrlInput,
       contentInput,
@@ -48,6 +52,13 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
     );
     await refetch();
     setLoading(false);
+
+    if (!result) {
+      setAlert(
+        "Duplicating Identifier detected. Use edit instead. SOLID. S = Single Responsibility."
+      );
+      return;
+    }
 
     setShow(false);
   };
@@ -64,6 +75,17 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
         <Loading />
       ) : (
         <>
+          <Alert marginY={10} intent="warning">
+            Until new structure of roadmap arise. You shall delete and recreate if one want to alter
+            identifier.
+          </Alert>
+          <TextInputField
+            label="Identifier"
+            hint="Please enter the command to call this roadmap"
+            required
+            type="text"
+            ref={idRef}
+          />
           <TextInputField
             label="Title"
             hint="Please enter the title"

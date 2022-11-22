@@ -50,7 +50,9 @@ export default function List({ data, refetch }: ListProps) {
           <Table.Row key={item.id} isSelectable onSelect={() => detailRuleHandler(no - 1)}>
             <Table.TextCell>{++no}</Table.TextCell>
             <Table.TextCell>{item.name}</Table.TextCell>
-            <Table.TextCell>{item.value}</Table.TextCell>
+            <Table.TextCell>
+              {item.value.length > 20 ? item.value.substring(0, 20) + "..." : item.value}
+            </Table.TextCell>
             <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
               <Button onClick={() => editRuleHandler(no - 1)}>
                 <FiEdit fontSize={70} />

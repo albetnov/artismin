@@ -1,3 +1,4 @@
+import { doc, setDoc } from "firebase/firestore";
 import BaseRepository from "./BaseRepository";
 
 export default class RoadmapRepository extends BaseRepository {
@@ -11,14 +12,27 @@ export default class RoadmapRepository extends BaseRepository {
   }
 
   async createRoadmap(
+    id: string,
     author_name: string,
     author_url: string,
     content: string,
     footer: string,
     image: string,
     title: string
-  ): Promise<void> {
-    await this.create({ author_name, author_url, content, footer, image, title });
+  ): Promise<boolean> {
+    if ((await this.find(id)).exists()) {
+      return false;
+    }
+
+    await setDoc(doc(this.db, this.table, id), {
+      author_name,
+      author_url,
+      content,
+      footer,
+      image,
+      title,
+    });
+    return true;
   }
 
   async editRoadmap(
