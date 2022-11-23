@@ -7,6 +7,13 @@ const headerBuilder = {
   },
 };
 
+const headerBuilderWithJson = {
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
+
 export const checkForHealth = async (baseUrl: string) => {
   return await fetch(baseUrl + "/health", headerBuilder);
 };
@@ -61,11 +68,79 @@ interface ClearCacheOptions {
 
 export const clearCache = async (baseUrl: string, options?: ClearCacheOptions) => {
   return await fetch(await urlBuilder(baseUrl, "refreshCache"), {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
+    ...headerBuilderWithJson,
     method: "POST",
     body: options ? JSON.stringify(options) : "{}",
+  });
+};
+
+interface SendMessageOptions {
+  channel_id: string;
+  message: string;
+}
+
+export const sendMessage = async (baseUrl: string, options: SendMessageOptions) => {
+  return await fetch(await urlBuilder(baseUrl, "sendMessage"), {
+    ...headerBuilderWithJson,
+    method: "POST",
+    body: JSON.stringify(options),
+  });
+};
+
+export interface ChannelListInterface {
+  type: number;
+  guild: string;
+  guildId: string;
+  parentId: string;
+  permissionOverwrites: string[];
+  messages: any[];
+  threads: any[];
+  nsfw: boolean;
+  flags: number;
+  id: string;
+  name: string;
+  rawPosition: number;
+  topic: any;
+  lastMessageId?: string;
+  rateLimitPerUser: number;
+  createdTimestamp: number;
+  lastPinTimestamp?: number;
+}
+
+export const channelList = async (baseUrl: string) => {
+  return await fetch(await urlBuilder(baseUrl, "channelList"), headerBuilder);
+};
+
+type OrNull<T> = T | null;
+type StringOrNull = OrNull<string>;
+
+export interface Author {
+  name: string;
+  url: StringOrNull;
+  iconUrl: StringOrNull;
+}
+
+export interface Field {
+  name: string;
+  value: string;
+  inline: OrNull<boolean>;
+}
+
+export interface SendEmbedOptions {
+  title: StringOrNull;
+  description: StringOrNull;
+  author: OrNull<Author>;
+  fields: Field[];
+  image: StringOrNull;
+  thumbnail: StringOrNull;
+  color: StringOrNull;
+  channel_id: string;
+}
+
+export const sendEmbed = async (baseUrl: string, options: SendEmbedOptions) => {
+  return await fetch(await urlBuilder(baseUrl, "sendEmbed"), {
+    ...headerBuilderWithJson,
+    method: "POST",
+    body: JSON.stringify(options),
   });
 };

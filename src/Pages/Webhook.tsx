@@ -7,6 +7,8 @@ import CheckHealth from "../Components/Webhook/CheckHealth";
 import ClearCache from "../Components/Webhook/ClearCache";
 import NotConfigured from "../Components/Webhook/NotConfigured";
 import Ping from "../Components/Webhook/Ping";
+import SendEmbed from "../Components/Webhook/SendEmbed";
+import SendMessage from "../Components/Webhook/SendMessage";
 import { useWebhookStore } from "../Store/WebhookStore";
 import { checkForHealth } from "../Utils/Api";
 
@@ -34,7 +36,7 @@ export default function Webhook() {
     };
     checkWebhook();
   }, [webhookUrl]);
-    
+
   return (
     <Layout>
       <Card>
@@ -61,6 +63,12 @@ export default function Webhook() {
                 </Table.Row>
                 <Table.Row>
                   <ClearCache />
+                </Table.Row>
+                <Table.Row>
+                  <SendMessage />
+                </Table.Row>
+                <Table.Row>
+                  <SendEmbed />
                 </Table.Row>
               </Table.Body>
             </Table>
