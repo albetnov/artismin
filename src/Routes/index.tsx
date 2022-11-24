@@ -1,14 +1,15 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Authed from "../Components/Auth/Authed";
-import Logout from "../Components/Auth/Logout";
-import Channels from "../Pages/Channels";
-import Dashboard from "../Pages/Dashboard";
-import Login from "../Pages/Login";
-import Roadmap from "../Pages/Roadmap";
-import Roles from "../Pages/Roles";
-import Rules from "../Pages/Rules";
-import Scheduler from "../Pages/Scheduler";
-import Webhook from "../Pages/Webhook";
+const Authed = React.lazy(() => import("../Components/Auth/Authed"));
+const Logout = React.lazy(() => import("../Components/Auth/Logout"));
+const Channels = React.lazy(() => import("../Pages/Channels"));
+const Dashboard = React.lazy(() => import("../Pages/Dashboard"));
+const Login = React.lazy(() => import("../Pages/Login"));
+const Roadmap = React.lazy(() => import("../Pages/Roadmap"));
+const Roles = React.lazy(() => import("../Pages/Roles"));
+const Rules = React.lazy(() => import("../Pages/Rules"));
+const Scheduler = React.lazy(() => import("../Pages/Scheduler"));
+const Webhook = React.lazy(() => import("../Pages/Webhook"));
 
 export default createBrowserRouter([
   {
