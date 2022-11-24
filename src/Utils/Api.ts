@@ -43,10 +43,10 @@ const generateKey = async () => {
     result = installToken(repo);
   } else {
     const data = token.data();
-    if (data!.expire_at.toDate() < new Date()) {
+    if (data?.expire_at.toDate() < new Date()) {
       result = installToken(repo);
     } else {
-      result = data!.value;
+      result = data.value;
     }
   }
 

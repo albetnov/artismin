@@ -45,11 +45,11 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
     if (loading || !item) return;
 
     setAlert(false);
-    const titleInput = titleRef.current!.value;
-    const descInput = descRef.current!.value;
-    const imageInput = imageRef.current!.value;
-    const dateInput = dateRef.current!.value;
-    const timeInput = timeRef.current!.value;
+    const titleInput = titleRef.current?.value;
+    const descInput = descRef.current?.value;
+    const imageInput = imageRef.current?.value;
+    const dateInput = dateRef.current?.value;
+    const timeInput = timeRef.current?.value;
 
     if (!channel || !titleInput || !descInput || !imageInput || !dateInput || !timeInput) {
       setAlert("Invalid inputs");

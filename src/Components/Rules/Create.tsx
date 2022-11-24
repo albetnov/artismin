@@ -14,8 +14,8 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
     if (loading) return;
 
     setAlert(false);
-    const idInput = idRef.current!.value;
-    const nameInput = nameRef.current!.value;
+    const idInput = idRef.current?.value;
+    const nameInput = nameRef.current?.value;
     if (!idInput || !nameInput) {
       setAlert("Invalid inputs");
       return;

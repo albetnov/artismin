@@ -1,4 +1,4 @@
-import { Heading, ListItem, Pane, Text, UnorderedList } from "evergreen-ui";
+import { Heading, ListItem, Pane, UnorderedList } from "evergreen-ui";
 import React from "react";
 import { Link } from "react-router-dom";
 import Container from "./Container";

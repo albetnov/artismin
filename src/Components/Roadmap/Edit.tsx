@@ -18,12 +18,12 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
     if (loading || !item) return;
 
     setAlert(false);
-    const authorNameInput = authorNameRef.current!.value;
-    const authorUrlInput = authorUrlRef.current!.value;
-    const contentInput = contentRef.current!.value;
-    const footerInput = footerRef.current!.value;
-    const imageInput = imageRef.current!.value;
-    const titleInput = titleRef.current!.value;
+    const authorNameInput = authorNameRef.current?.value;
+    const authorUrlInput = authorUrlRef.current?.value;
+    const contentInput = contentRef.current?.value;
+    const footerInput = footerRef.current?.value;
+    const imageInput = imageRef.current?.value;
+    const titleInput = titleRef.current?.value;
     if (
       !authorNameInput ||
       !authorUrlInput ||

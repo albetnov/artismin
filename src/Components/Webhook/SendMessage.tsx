@@ -40,7 +40,7 @@ export default function SendMessage() {
       setLoading(true);
       if (!webhookUrl) throw new Error();
 
-      const content = contentRef.current!.value;
+      const content = contentRef.current?.value;
 
       const res = await sendMessage(webhookUrl, {
         channel_id: channel,

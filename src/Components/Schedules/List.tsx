@@ -1,4 +1,4 @@
-import { Button, Table, Text } from "evergreen-ui";
+import { Button, Table } from "evergreen-ui";
 import { DocumentData } from "firebase/firestore";
 import Loading from "../Loading";
 import { FiEdit, FiTrash } from "react-icons/fi";

@@ -20,13 +20,13 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
     if (loading) return;
 
     setAlert(false);
-    const authorNameInput = authorNameRef.current!.value;
-    const authorUrlInput = authorUrlRef.current!.value;
-    const contentInput = contentRef.current!.value;
-    const footerInput = footerRef.current!.value;
-    const imageInput = imageRef.current!.value;
-    const titleInput = titleRef.current!.value;
-    const idInput = idRef.current!.value;
+    const authorNameInput = authorNameRef.current?.value;
+    const authorUrlInput = authorUrlRef.current?.value;
+    const contentInput = contentRef.current?.value;
+    const footerInput = footerRef.current?.value;
+    const imageInput = imageRef.current?.value;
+    const titleInput = titleRef.current?.value;
+    const idInput = idRef.current?.value;
     if (
       !authorNameInput ||
       !authorUrlInput ||

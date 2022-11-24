@@ -7,7 +7,7 @@ export default function Welcome() {
       <Text>Welcome to Artismin. A Simple Admin Dashboard for managing Artisan Bot.</Text>
       <br />
       <Button marginTop={20} appearance="primary">
-        Let's Go!
+        Let&apos;s Go!
       </Button>
     </Card>
   );

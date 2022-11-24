@@ -44,8 +44,8 @@ export default function Login() {
   const loginHandler = async (event: FormEvent) => {
     event.preventDefault();
 
-    const userEmail = emailRef.current!.value;
-    const userPassword = passwordRef.current!.value;
+    const userEmail = emailRef.current?.value;
+    const userPassword = passwordRef.current?.value;
 
     if (!userEmail || !userPassword || userEmail.trim() === "" || userPassword.trim() === "") {
       setAlert("Please fix your form inputs format!");

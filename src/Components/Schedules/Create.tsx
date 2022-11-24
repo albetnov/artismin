@@ -1,13 +1,11 @@
 import {
   Alert,
-  Autocomplete,
   Checkbox,
   Combobox,
   Dialog,
   Label,
   Pane,
   TextareaField,
-  TextInput,
   TextInputField,
 } from "evergreen-ui";
 import { DocumentData, Timestamp } from "firebase/firestore";
@@ -43,11 +41,11 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
     if (loading) return;
 
     setAlert(false);
-    const titleInput = titleRef.current!.value;
-    const descInput = descRef.current!.value;
-    const imageInput = imageRef.current!.value;
-    const dateInput = dateRef.current!.value;
-    const timeInput = timeRef.current!.value;
+    const titleInput = titleRef.current?.value;
+    const descInput = descRef.current?.value;
+    const imageInput = imageRef.current?.value;
+    const dateInput = dateRef.current?.value;
+    const timeInput = timeRef.current?.value;
 
     if (!channel || !titleInput || !descInput || !imageInput || !dateInput || !timeInput) {
       setAlert("Invalid inputs");

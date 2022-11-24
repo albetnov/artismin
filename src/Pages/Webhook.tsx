@@ -40,7 +40,7 @@ export default function Webhook() {
   return (
     <Layout>
       <Card>
-        <Heading>Webhook</Heading>
+        <Heading>Webhook (learn more)</Heading>
         {loading ? (
           <Loading />
         ) : check !== null && !check ? (
