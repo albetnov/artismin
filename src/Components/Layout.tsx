@@ -111,7 +111,7 @@ export default function Layout({ children }: LayoutProps) {
             </Menu>
           }
         >
-          <Button className="md:hidden absolute left-0 top-0" marginRight={16}>
+          <Button className="block md:hidden absolute left-0 top-0" marginRight={16}>
             <FiMenu />
           </Button>
         </Popover>
