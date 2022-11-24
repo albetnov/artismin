@@ -1,5 +1,6 @@
 import { Alert, Button, Code, Heading, Pane, Table, Text } from "evergreen-ui";
 import { useEffect, useState } from "react";
+import { FiX } from "react-icons/fi";
 import BasicModal from "../Components/BasicModal";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
@@ -14,12 +15,17 @@ import { useWebhookStore } from "../Store/WebhookStore";
 import { checkForHealth } from "../Utils/Api";
 
 export default function Webhook() {
-  const { webhookUrl } = useWebhookStore((state) => ({ webhookUrl: state.webhookUrl }));
+  const { webhookUrl, changed, unregister } = useWebhookStore((state) => ({
+    webhookUrl: state.webhookUrl,
+    changed: state.changed,
+    unregister: state.unregister,
+  }));
   const [check, setCheck] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [learnMore, setLearnMore] = useState(false);
 
   useEffect(() => {
+    console.log(webhookUrl);
     const checkWebhook = async () => {
       if (!webhookUrl) {
         setCheck(false);
@@ -37,7 +43,7 @@ export default function Webhook() {
       }
     };
     checkWebhook();
-  }, [webhookUrl]);
+  }, [webhookUrl, changed]);
 
   return (
     <Layout>
@@ -46,7 +52,7 @@ export default function Webhook() {
         title="What is Webhook?"
         onCloseComplete={() => setLearnMore(false)}
       >
-        <Text textAlign="center" size={700}>
+        <Text textAlign="center" size={600}>
           Webhook
         </Text>
         <hr />
@@ -89,7 +95,7 @@ export default function Webhook() {
           <>
             <Alert marginY={10}>Configured: {webhookUrl}. Health check passed</Alert>
             <Pane overflowX="auto">
-              <Table className="w-[120%] lg:max-w-none">
+              <Table className="w-[120%] md:w-auto">
                 <Table.Head>
                   <Table.TextHeaderCell>Route</Table.TextHeaderCell>
                   <Table.TextHeaderCell>Action</Table.TextHeaderCell>
@@ -115,6 +121,11 @@ export default function Webhook() {
               </Table>
             </Pane>
           </>
+        )}
+        {check && (
+          <Button intent="danger" onClick={unregister}>
+            <FiX /> Invalidate
+          </Button>
         )}
       </Card>
     </Layout>
