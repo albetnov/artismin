@@ -4,7 +4,11 @@ import shallow from "zustand/shallow";
 import { useAuthStore } from "../../Store/AuthStore";
 import Loading from "../Loading";
 
-export default function Authed() {
+interface AuthedProps {
+  redirect?: boolean;
+}
+
+export default function Authed({ redirect = false }: AuthedProps) {
   const navigate = useNavigate();
   const { isAuthed, checkForAuth } = useAuthStore(
     (state) => ({ isAuthed: state.isAuthed, checkForAuth: state.checkForAuth }),
@@ -18,6 +22,10 @@ export default function Authed() {
   useEffect(() => {
     if (!isAuthed && isAuthed !== null) {
       navigate("/login");
+    }
+
+    if (redirect && isAuthed) {
+      navigate("/dashboard");
     }
   }, [isAuthed]);
 

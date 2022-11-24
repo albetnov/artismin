@@ -48,7 +48,6 @@ export default function SendEmbed() {
   const [fields, setFields] = useState<FieldsInterface[]>([]);
 
   const changeFieldHandler = (index: number, event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name, event.target.value);
     setFields((prev) => {
       const data = [...prev];
       if (event.target.name === "name") {

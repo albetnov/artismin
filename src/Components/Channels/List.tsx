@@ -1,4 +1,4 @@
-import { Button, Table } from "evergreen-ui";
+import { Button, Pane, Table } from "evergreen-ui";
 import { DocumentData } from "firebase/firestore";
 import Loading from "../Loading";
 import { FiEdit, FiTrash } from "react-icons/fi";
@@ -36,32 +36,34 @@ export default function List({ data, refetch }: ListProps) {
   };
 
   return (
-    <Table>
-      <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
-      <Detail item={current} show={openDetail} setShow={setOpenDetail} />
-      <Table.Head>
-        <Table.TextHeaderCell>No</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Channel Name</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Channel ID</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Action</Table.TextHeaderCell>
-      </Table.Head>
-      <Table.Body>
-        {data.map((item: DocumentData, no: number) => (
-          <Table.Row key={item.id} isSelectable onSelect={() => detailChannelHandler(no - 1)}>
-            <Table.TextCell>{++no}</Table.TextCell>
-            <Table.TextCell>{item.name}</Table.TextCell>
-            <Table.TextCell>{item.value}</Table.TextCell>
-            <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
-              <Button onClick={() => editChannelHandler(no - 1)}>
-                <FiEdit fontSize={50} />
-              </Button>
-              <Button intent="danger" onClick={() => deleteChannelHandler(item.id)}>
-                <FiTrash fontSize={50} />
-              </Button>
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+    <Pane overflowX="auto">
+      <Table width="fit-content">
+        <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
+        <Detail item={current} show={openDetail} setShow={setOpenDetail} />
+        <Table.Head>
+          <Table.TextHeaderCell>No</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Channel Name</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Channel ID</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Action</Table.TextHeaderCell>
+        </Table.Head>
+        <Table.Body>
+          {data.map((item: DocumentData, no: number) => (
+            <Table.Row key={item.id} isSelectable onSelect={() => detailChannelHandler(no - 1)}>
+              <Table.TextCell>{++no}</Table.TextCell>
+              <Table.TextCell>{item.name}</Table.TextCell>
+              <Table.TextCell>{item.value}</Table.TextCell>
+              <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
+                <Button onClick={() => editChannelHandler(no - 1)}>
+                  <FiEdit fontSize={50} />
+                </Button>
+                <Button intent="danger" onClick={() => deleteChannelHandler(item.id)}>
+                  <FiTrash fontSize={50} />
+                </Button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Pane>
   );
 }

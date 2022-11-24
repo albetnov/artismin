@@ -1,4 +1,4 @@
-import { Heading, ListItem, Pane, UnorderedList } from "evergreen-ui";
+import { Code, Heading, ListItem, Pane, UnorderedList } from "evergreen-ui";
 import Card from "../Card";
 import Question from "./Question";
 
@@ -7,15 +7,15 @@ export default function QuestionAnswer() {
     <Card>
       <Heading size={700}>Question and Answer</Heading>
       <br />
-      <Pane display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={30}>
+      <Pane className="flex flex-col gap-10 lg:grid lg:grid-cols-3">
         <Question title="Why are some changes not live?">
           You may have realize that sometime changes you&apos;ll made in this website will not apply
           to the bot. This happen due to caching mechanism. And lucky enough that this only applies
           to: channels and roles as both of them didn&apos;t change frequently. The cache however
           will not revalidate by it&apos;s own. It&apos;s require server restart. But, this action
-          is not neccessary with the RefreshCache dev command. You can simply type &quot;/dev&quot;
-          and then &quot;Artisan:RefreshCache&quot; and the bot will revalidate the cache right
-          away.
+          is not neccessary with the RefreshCache dev command. You can simply type <Code>/dev</Code>
+          and then <Code>Artisan:RefreshCache</Code> and the bot will revalidate the cache right
+          away. Luckily this behaviour can be triggered with Webhook.
         </Question>
         <Question title="Why i should avoid registering channel for autocomplete schedules?">
           I believe you will ask this question if you&apos;re seeing the alert of enabling same

@@ -12,8 +12,8 @@ export default function Card({ children }: CardProps) {
       marginTop={30}
       backgroundColor="#ffffff"
       boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
-      maxWidth="fit-content"
       marginX="auto"
+      className="max-w-sm lg:max-w-none"
     >
       {children}
     </EverGreenCard>

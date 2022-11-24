@@ -1,5 +1,6 @@
-import { Alert, Heading, Table } from "evergreen-ui";
+import { Alert, Button, Code, Heading, Pane, Table, Text } from "evergreen-ui";
 import { useEffect, useState } from "react";
+import BasicModal from "../Components/BasicModal";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
@@ -16,6 +17,7 @@ export default function Webhook() {
   const { webhookUrl } = useWebhookStore((state) => ({ webhookUrl: state.webhookUrl }));
   const [check, setCheck] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
+  const [learnMore, setLearnMore] = useState(false);
 
   useEffect(() => {
     const checkWebhook = async () => {
@@ -39,8 +41,46 @@ export default function Webhook() {
 
   return (
     <Layout>
+      <BasicModal
+        isShown={learnMore}
+        title="What is Webhook?"
+        onCloseComplete={() => setLearnMore(false)}
+      >
+        <Text textAlign="center" size={700}>
+          Webhook
+        </Text>
+        <hr />
+        <Text textAlign="left" display="block">
+          Webhook commonly know as after effect requests to certain endpoint. This should fulfill
+          your coriousity about general{" "}
+          <a className="underline text-sky-400" href="https://en.wikipedia.org/wiki/Webhook">
+            Webhook
+          </a>
+          . Where as Artisan Bot used Webhook to trigger some events in the bot. Those events
+          related to: Refreshing Cache, Sending Message, etc.
+        </Text>
+        <Text textAlign="left" marginTop={10} display="block">
+          In order to use Webhook. You shall set <Code>&quot;ENABLE_WEBHOOK&quot;</Code> to{" "}
+          <Code>true</Code> in your <Code>.env</Code> file and then restart the bot servers. When
+          starting the bot, You should watch under Webhook URL logged in your console. Use the url
+          and insert it in the following field. Once done, Artismin will automatically validate and
+          remember it for you.
+        </Text>
+        <Text textAlign="left" marginTop={10} display="block">
+          Under the hood, Artisan Bot provides this webhook as API powered by{" "}
+          <a className="underline text-sky-400" href="https://www.fastify.io/">
+            Fastify
+          </a>
+          . So you could also use Postman or other tools to trigger events in the bot.
+        </Text>
+      </BasicModal>
       <Card>
-        <Heading>Webhook (learn more)</Heading>
+        <Heading>
+          Webhook{" "}
+          <Button appearance="minimal" onClick={() => setLearnMore(true)}>
+            (learn more)
+          </Button>
+        </Heading>
         {loading ? (
           <Loading />
         ) : check !== null && !check ? (
@@ -48,30 +88,32 @@ export default function Webhook() {
         ) : (
           <>
             <Alert marginY={10}>Configured: {webhookUrl}. Health check passed</Alert>
-            <Table>
-              <Table.Head>
-                <Table.TextHeaderCell>Route</Table.TextHeaderCell>
-                <Table.TextHeaderCell>Action</Table.TextHeaderCell>
-                <Table.TextHeaderCell>Response</Table.TextHeaderCell>
-              </Table.Head>
-              <Table.Body>
-                <Table.Row>
-                  <CheckHealth />
-                </Table.Row>
-                <Table.Row>
-                  <Ping />
-                </Table.Row>
-                <Table.Row>
-                  <ClearCache />
-                </Table.Row>
-                <Table.Row>
-                  <SendMessage />
-                </Table.Row>
-                <Table.Row>
-                  <SendEmbed />
-                </Table.Row>
-              </Table.Body>
-            </Table>
+            <Pane overflowX="auto">
+              <Table className="w-[120%] lg:max-w-none">
+                <Table.Head>
+                  <Table.TextHeaderCell>Route</Table.TextHeaderCell>
+                  <Table.TextHeaderCell>Action</Table.TextHeaderCell>
+                  <Table.TextHeaderCell>Response</Table.TextHeaderCell>
+                </Table.Head>
+                <Table.Body>
+                  <Table.Row>
+                    <CheckHealth />
+                  </Table.Row>
+                  <Table.Row>
+                    <Ping />
+                  </Table.Row>
+                  <Table.Row>
+                    <ClearCache />
+                  </Table.Row>
+                  <Table.Row>
+                    <SendMessage />
+                  </Table.Row>
+                  <Table.Row>
+                    <SendEmbed />
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            </Pane>
           </>
         )}
       </Card>

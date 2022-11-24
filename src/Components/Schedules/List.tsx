@@ -1,4 +1,4 @@
-import { Button, Table } from "evergreen-ui";
+import { Button, Pane, Table } from "evergreen-ui";
 import { DocumentData } from "firebase/firestore";
 import Loading from "../Loading";
 import { FiEdit, FiTrash } from "react-icons/fi";
@@ -36,7 +36,8 @@ export default function List({ data, refetch }: ListProps) {
   };
 
   return (
-    <Table>
+    <Pane overflowX="auto">
+    <Table width="fit-content">
       <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
       <Detail item={current} show={openDetail} setShow={setOpenDetail} />
       <Table.Head>
@@ -67,5 +68,6 @@ export default function List({ data, refetch }: ListProps) {
         ))}
       </Table.Body>
     </Table>
+    </Pane>
   );
 }

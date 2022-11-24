@@ -13,6 +13,7 @@ export default function Container({ children, padding }: ContainerProps) {
       minHeight="100vh"
       marginX="auto"
       textAlign="center"
+      maxWidth="full"
     >
       {children}
     </Pane>
