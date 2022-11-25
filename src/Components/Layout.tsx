@@ -18,6 +18,7 @@ import {
   FiLogOut,
   FiMenu,
   FiServer,
+  FiToggleLeft,
   FiUserCheck,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -62,6 +63,11 @@ const links = [
     icon: FiGlobe,
     route: "/webhook",
     name: "Webhook",
+  },
+  {
+    icon: FiToggleLeft,
+    route: "/websocket",
+    name: "Websocket (Experimental)",
   },
   {
     icon: FiLogOut,

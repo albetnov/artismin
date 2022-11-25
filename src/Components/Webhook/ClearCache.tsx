@@ -59,11 +59,22 @@ export default function ClearCache() {
           <Loading />
         ) : (
           <>
-            <Alert>Unchecking both simply clearing all.</Alert>
+            <Alert>
+              Unchecking both simply clearing all. If you want to clear each of them. Check one of
+              them then.
+            </Alert>
             <Label>Clear channel only?</Label>
-            <Checkbox onChange={() => setChannels((prev) => !prev)} checked={channels} />
+            <Checkbox
+              onChange={() => setChannels((prev) => !prev)}
+              checked={channels}
+              disabled={roles}
+            />
             <Label>Clear Roles only?</Label>
-            <Checkbox onChange={() => setRoles((prev) => !prev)} checked={roles} />
+            <Checkbox
+              onChange={() => setRoles((prev) => !prev)}
+              checked={roles}
+              disabled={channels}
+            />
           </>
         )}
       </Dialog>

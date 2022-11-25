@@ -10,6 +10,7 @@ const Roles = React.lazy(() => import("../Pages/Roles"));
 const Rules = React.lazy(() => import("../Pages/Rules"));
 const Scheduler = React.lazy(() => import("../Pages/Scheduler"));
 const Webhook = React.lazy(() => import("../Pages/Webhook"));
+const WebSocket = React.lazy(() => import("../Pages/WebSocket"));
 
 export default createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export default createBrowserRouter([
       {
         path: "webhook",
         element: <Webhook />,
+      },
+      {
+        path: "websocket",
+        element: <WebSocket />,
       },
     ],
   },
