@@ -9,7 +9,7 @@ interface WebsocketStoreProps {
   unregister(): void;
 }
 
-export const useWebhookStore = create<WebsocketStoreProps>((set) => ({
+export const useWebsocketStore = create<WebsocketStoreProps>((set) => ({
   wssUrl: localStorage.getItem(WSS_URL) || false,
   changed: false,
   registerUrl(url: string) {

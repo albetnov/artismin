@@ -61,7 +61,7 @@ export const ping = async (baseUrl: string) => {
   return await fetch(await urlBuilder(baseUrl, "ping"), headerBuilder);
 };
 
-interface ClearCacheOptions {
+export interface ClearCacheOptions {
   channels: boolean;
   roles: boolean;
 }
@@ -74,7 +74,7 @@ export const clearCache = async (baseUrl: string, options?: ClearCacheOptions) =
   });
 };
 
-interface SendMessageOptions {
+export interface SendMessageOptions {
   channel_id: string;
   message: string;
 }
