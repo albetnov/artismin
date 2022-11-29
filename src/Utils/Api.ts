@@ -14,8 +14,30 @@ const headerBuilderWithJson = {
   },
 };
 
+interface TimeoutableFetchOptions {
+  timeout: number;
+  [key: string]: string | number | object;
+}
+
+export const timeoutableFetch = async (
+  url: string,
+  options: TimeoutableFetchOptions = { timeout: 8000 }
+) => {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), options.timeout);
+  const response = await fetch(url, {
+    ...options,
+    signal: controller.signal,
+  });
+  clearTimeout(id);
+  return response;
+};
+
 export const checkForHealth = async (baseUrl: string) => {
-  return await fetch(baseUrl + "/health", headerBuilder);
+  return await timeoutableFetch(baseUrl + "/health", {
+    timeout: 8000,
+    ...headerBuilder,
+  });
 };
 
 const makeToken = () => {

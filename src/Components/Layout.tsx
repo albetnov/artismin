@@ -8,7 +8,7 @@ import {
   Position,
   UnorderedList,
 } from "evergreen-ui";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiActivity,
   FiCalendar,
@@ -18,10 +18,14 @@ import {
   FiLogOut,
   FiMenu,
   FiServer,
+  FiSettings,
   FiToggleLeft,
   FiUserCheck,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import SettingsRepository from "../Repositories/SettingsRepository";
+import useSettingsStore from "../Store/SettingStore";
+import showRouteParser from "../Utils/showRouteParser";
 import Container from "./Container";
 
 interface LayoutProps {
@@ -70,6 +74,11 @@ const links = [
     name: "Websocket (Experimental)",
   },
   {
+    icon: FiSettings,
+    route: "/settings",
+    name: "Settings",
+  },
+  {
     icon: FiLogOut,
     route: "/logout",
     name: "Logout",
@@ -77,6 +86,31 @@ const links = [
 ];
 
 export default function Layout({ children }: LayoutProps) {
+  const { changed, setChanged } = useSettingsStore((state) => ({
+    changed: state.isChanged,
+    setChanged: state.setChanged,
+  }));
+
+  const [linksList, setLinksList] = useState(links);
+
+  const fetchSettings = async () => {
+    const data = await new SettingsRepository().getSettings();
+    console.log(data);
+    const result = showRouteParser(data);
+    setLinksList(links.filter((item) => (item.route in result ? result[item.route] : true)));
+  };
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  useEffect(() => {
+    if (changed) {
+      fetchSettings();
+      setChanged(false);
+    }
+  }, [changed]);
+
   return (
     <Container>
       <Pane>
@@ -96,7 +130,7 @@ export default function Layout({ children }: LayoutProps) {
           <ListItem>
             <Heading size={800}>Artismin</Heading>
           </ListItem>
-          {links.map((item, i) => (
+          {linksList.map((item, i) => (
             <ListItem key={i} display="flex" marginX="auto" alignItems="center" gap={3}>
               <item.icon />
               <Link to={item.route}>{item.name}</Link>
@@ -108,7 +142,7 @@ export default function Layout({ children }: LayoutProps) {
           content={
             <Menu>
               <Menu.Group>
-                {links.map((item, i) => (
+                {linksList.map((item, i) => (
                   <Menu.Item key={i} icon={item.icon}>
                     <Link to={item.route}>{item.name}</Link>
                   </Menu.Item>

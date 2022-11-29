@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Settings from "../Pages/Settings";
 const Authed = React.lazy(() => import("../Components/Auth/Authed"));
 const Logout = React.lazy(() => import("../Components/Auth/Logout"));
 const Channels = React.lazy(() => import("../Pages/Channels"));
@@ -52,6 +53,10 @@ export default createBrowserRouter([
       {
         path: "websocket",
         element: <WebSocket />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

@@ -1,8 +1,10 @@
-import { ClearCacheOptions, SendEmbedOptions, SendMessageOptions } from "./Api";
+import { ClearCacheOptions, SendEmbedOptions, SendMessageOptions, timeoutableFetch } from "./Api";
 
 export const checkClient = async (baseUrl: string) => {
   try {
-    const res = await fetch(`${baseUrl}/api/checkUser`);
+    const res = await timeoutableFetch(`${baseUrl}/api/checkUser`, {
+      timeout: 8000,
+    });
     if (!res.ok) {
       throw Error("Error fetching");
     }
