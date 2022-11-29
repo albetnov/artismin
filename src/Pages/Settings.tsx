@@ -1,4 +1,4 @@
-import { Alert, Heading, Switch, Table, Text } from "evergreen-ui";
+import { Alert, Heading, Pane, Switch, Table, Text } from "evergreen-ui";
 import { DocumentData } from "firebase/firestore";
 import { ChangeEvent, useEffect, useState } from "react";
 import Card from "../Components/Card";
@@ -52,6 +52,12 @@ export default function Settings() {
       }
       await new SettingsRepository().editSaves(id, wssUrl, e.target.checked);
       checkWSCloud();
+    } else if (id === "enable_welcome") {
+      const checked = e.target.checked;
+      await new SettingsRepository().editSetting(id, checked);
+      if (!checked) {
+        await new SettingsRepository().editSetting("enable_rules", checked);
+      }
     } else {
       await new SettingsRepository().editSetting(id, e.target.checked);
     }
@@ -72,26 +78,31 @@ export default function Settings() {
             <Loading />
           </Alert>
         )}
-        <Table>
-          <Table.Head>
-            <Table.TextHeaderCell>Name</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Action</Table.TextHeaderCell>
-          </Table.Head>
-          <Table.Body>
-            {settings.map((item) => (
-              <Table.Row key={item.id}>
-                <Table.TextCell>{item.title}</Table.TextCell>
-                <Table.Cell>
-                  <Switch
-                    disabled={isLoading}
-                    checked={item.value}
-                    onChange={(e) => changeValue(item.id, e)}
-                  />
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+        <Alert intent="warning" marginY={10}>
+          Some action may take a while to finally apply to bot.
+        </Alert>
+        <Pane>
+          <Table>
+            <Table.Head className="w-full lg:w-[500px]">
+              <Table.TextHeaderCell>Name</Table.TextHeaderCell>
+              <Table.TextHeaderCell>Action</Table.TextHeaderCell>
+            </Table.Head>
+            <Table.Body className="w-full lg:w-[500px]">
+              {settings.map((item) => (
+                <Table.Row key={item.id}>
+                  <Table.TextCell width="fit-content">{item.title}</Table.TextCell>
+                  <Table.Cell display="flex" justifyContent="center">
+                    <Switch
+                      disabled={isLoading}
+                      checked={item.value}
+                      onChange={(e) => changeValue(item.id, e)}
+                    />
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </Pane>
       </Card>
     </Layout>
   );
