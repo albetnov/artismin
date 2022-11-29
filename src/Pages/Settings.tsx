@@ -4,13 +4,25 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
+import useAlert from "../Hooks/useAlert";
 import SettingsRepository from "../Repositories/SettingsRepository";
 import useSettingsStore from "../Store/SettingStore";
+import { useWebhookStore } from "../Store/WebhookStore";
+import { useWebsocketStore } from "../Store/WebsocketStore";
 
 export default function Settings() {
   const [settings, setSettings] = useState<DocumentData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { setChanged } = useSettingsStore((state) => ({ setChanged: state.setChanged }));
+  const { webhookUrl, checkWHCloud } = useWebhookStore((state) => ({
+    webhookUrl: state.webhookUrl,
+    checkWHCloud: state.checkCloud,
+  }));
+  const { wssUrl, checkWSCloud } = useWebsocketStore((state) => ({
+    wssUrl: state.wssUrl,
+    checkWSCloud: state.checkCloud,
+  }));
+  const { element, changeAlert, resetAlert } = useAlert();
 
   const fetchSettings = async () => {
     setIsLoading(true);
@@ -25,7 +37,24 @@ export default function Settings() {
 
   const changeValue = async (id: string, e: ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true);
-    await new SettingsRepository().editSetting(id, e.target.checked);
+    resetAlert();
+    if (id === "saves_url_webhook") {
+      if (!webhookUrl) {
+        changeAlert("Ups, Webhook URL not found.", "danger");
+        return;
+      }
+      await new SettingsRepository().editSaves(id, webhookUrl, e.target.checked);
+      checkWHCloud();
+    } else if (id === "saves_url_websocket") {
+      if (!wssUrl) {
+        changeAlert("Ups, Websocket URL not found.", "danger");
+        return;
+      }
+      await new SettingsRepository().editSaves(id, wssUrl, e.target.checked);
+      checkWSCloud();
+    } else {
+      await new SettingsRepository().editSetting(id, e.target.checked);
+    }
     setIsLoading(false);
     setChanged(true);
     fetchSettings();
@@ -37,6 +66,7 @@ export default function Settings() {
         <Heading>Settings</Heading>
         <Text>Adjust settings to your need</Text>
         <hr />
+        {element}
         {isLoading && (
           <Alert>
             <Loading />

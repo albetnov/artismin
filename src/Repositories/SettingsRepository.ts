@@ -17,4 +17,8 @@ export default class SettingsRepository extends BaseRepository {
   async editSetting(id: string, value: boolean) {
     await this.edit(id, { value });
   }
+
+  async editSaves(id: string, url: string, value: boolean) {
+    await this.edit(id, { url, value });
+  }
 }
