@@ -27,6 +27,7 @@ import SettingsRepository from "../Repositories/SettingsRepository";
 import useSettingsStore from "../Store/SettingStore";
 import showRouteParser from "../Utils/showRouteParser";
 import Container from "./Container";
+import Loading from "./Loading";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -91,7 +92,7 @@ export default function Layout({ children }: LayoutProps) {
     setChanged: state.setChanged,
   }));
 
-  const [linksList, setLinksList] = useState(links);
+  const [linksList, setLinksList] = useState<typeof links>([]);
 
   const fetchSettings = async () => {
     const data = await new SettingsRepository().getSettings();
@@ -130,23 +131,31 @@ export default function Layout({ children }: LayoutProps) {
           <ListItem>
             <Heading size={800}>Artismin</Heading>
           </ListItem>
-          {linksList.map((item, i) => (
-            <ListItem key={i} display="flex" marginX="auto" alignItems="center" gap={3}>
-              <item.icon />
-              <Link to={item.route}>{item.name}</Link>
-            </ListItem>
-          ))}
+          {linksList.length <= 0 ? (
+            <Loading />
+          ) : (
+            linksList.map((item, i) => (
+              <ListItem key={i} display="flex" marginX="auto" alignItems="center" gap={3}>
+                <item.icon />
+                <Link to={item.route}>{item.name}</Link>
+              </ListItem>
+            ))
+          )}
         </UnorderedList>
         <Popover
           position={Position.BOTTOM_LEFT}
           content={
             <Menu>
               <Menu.Group>
-                {linksList.map((item, i) => (
-                  <Menu.Item key={i} icon={item.icon}>
-                    <Link to={item.route}>{item.name}</Link>
-                  </Menu.Item>
-                ))}
+                {linksList.length <= 0 ? (
+                  <Loading />
+                ) : (
+                  linksList.map((item, i) => (
+                    <Menu.Item key={i} icon={item.icon}>
+                      <Link to={item.route}>{item.name}</Link>
+                    </Menu.Item>
+                  ))
+                )}
               </Menu.Group>
             </Menu>
           }

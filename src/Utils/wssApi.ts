@@ -57,3 +57,11 @@ export const sendEmbed = async (baseUrl: string, options: SendEmbedOptions) => {
     body: JSON.stringify(options),
   });
 };
+
+export const castRules = async (baseUrl: string) => {
+  return await fetch(`${baseUrl}/api/castRules`, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+};

@@ -5,6 +5,7 @@ import BasicModal from "../Components/BasicModal";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
+import CastRules from "../Components/Webhook/CastRules";
 import CheckHealth from "../Components/Webhook/CheckHealth";
 import ClearCache from "../Components/Webhook/ClearCache";
 import NotConfigured from "../Components/Webhook/NotConfigured";
@@ -116,6 +117,9 @@ export default function Webhook() {
                   </Table.Row>
                   <Table.Row>
                     <SendEmbed />
+                  </Table.Row>
+                  <Table.Row>
+                    <CastRules />
                   </Table.Row>
                 </Table.Body>
               </Table>

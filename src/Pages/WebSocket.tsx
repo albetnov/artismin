@@ -6,6 +6,7 @@ import BasicModal from "../Components/BasicModal";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
+import CastRules from "../Components/WebSocket/CastRules";
 import ClearCache from "../Components/WebSocket/ClearCache";
 import NotConfigured from "../Components/WebSocket/NotConfigured";
 import SendEmbed from "../Components/WebSocket/SendEmbed";
@@ -126,6 +127,9 @@ export default function WebSocket() {
                   </Table.Row>
                   <Table.Row>
                     <SendEmbed />
+                  </Table.Row>
+                  <Table.Row>
+                    <CastRules />
                   </Table.Row>
                 </Table.Body>
               </Table>

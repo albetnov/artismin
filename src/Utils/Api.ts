@@ -166,3 +166,7 @@ export const sendEmbed = async (baseUrl: string, options: SendEmbedOptions) => {
     body: JSON.stringify(options),
   });
 };
+
+export const castRules = async (baseUrl: string) => {
+  return await fetch(await urlBuilder(baseUrl, "castRules"), headerBuilder);
+};
