@@ -11,6 +11,7 @@ import ClearCache from "../Components/WebSocket/ClearCache";
 import NotConfigured from "../Components/WebSocket/NotConfigured";
 import SendEmbed from "../Components/WebSocket/SendEmbed";
 import SendMessage from "../Components/WebSocket/SendMessage";
+import SettingsRepository from "../Repositories/SettingsRepository";
 import { useWebsocketStore } from "../Store/WebsocketStore";
 import { checkClient } from "../Utils/wssApi";
 
@@ -24,6 +25,24 @@ export default function WebSocket() {
   const [check, setCheck] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [learnMore, setLearnMore] = useState(false);
+  const [hasRules, setHasRules] = useState(false);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await new SettingsRepository().find("enable_rules");
+      if (data.exists()) {
+        setHasRules(data.data().value);
+      } else {
+        setHasRules(false);
+      }
+    };
+
+    fetchSettings();
+
+    return () => {
+      setHasRules(false);
+    };
+  }, []);
 
   useEffect(() => {
     console.log(wssUrl);
@@ -128,9 +147,11 @@ export default function WebSocket() {
                   <Table.Row>
                     <SendEmbed />
                   </Table.Row>
-                  <Table.Row>
-                    <CastRules />
-                  </Table.Row>
+                  {hasRules && (
+                    <Table.Row>
+                      <CastRules />
+                    </Table.Row>
+                  )}
                 </Table.Body>
               </Table>
             </Pane>

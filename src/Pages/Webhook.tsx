@@ -12,6 +12,7 @@ import NotConfigured from "../Components/Webhook/NotConfigured";
 import Ping from "../Components/Webhook/Ping";
 import SendEmbed from "../Components/Webhook/SendEmbed";
 import SendMessage from "../Components/Webhook/SendMessage";
+import SettingsRepository from "../Repositories/SettingsRepository";
 import { useWebhookStore } from "../Store/WebhookStore";
 import { checkForHealth } from "../Utils/Api";
 
@@ -24,6 +25,24 @@ export default function Webhook() {
   const [check, setCheck] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [learnMore, setLearnMore] = useState(false);
+  const [hasRules, setHasRules] = useState(false);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await new SettingsRepository().find("enable_rules");
+      if (data.exists()) {
+        setHasRules(data.data().value);
+      } else {
+        setHasRules(false);
+      }
+    };
+
+    fetchSettings();
+
+    return () => {
+      setHasRules(false);
+    };
+  }, []);
 
   useEffect(() => {
     console.log(webhookUrl);
@@ -118,9 +137,11 @@ export default function Webhook() {
                   <Table.Row>
                     <SendEmbed />
                   </Table.Row>
-                  <Table.Row>
-                    <CastRules />
-                  </Table.Row>
+                  {hasRules && (
+                    <Table.Row>
+                      <CastRules />
+                    </Table.Row>
+                  )}
                 </Table.Body>
               </Table>
             </Pane>

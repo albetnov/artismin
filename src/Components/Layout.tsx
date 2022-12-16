@@ -72,7 +72,7 @@ const links = [
   {
     icon: FiToggleLeft,
     route: "/websocket",
-    name: "Websocket (Experimental)",
+    name: "Websocket",
   },
   {
     icon: FiSettings,

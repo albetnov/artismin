@@ -4,6 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
+import AdjustBye from "../Components/Settings/AdjustBye";
 import useAlert from "../Hooks/useAlert";
 import SettingsRepository from "../Repositories/SettingsRepository";
 import useSettingsStore from "../Store/SettingStore";
@@ -97,6 +98,7 @@ export default function Settings() {
                       checked={item.value}
                       onChange={(e) => changeValue(item.id, e)}
                     />
+                    {item.id === "enable_bye" && <AdjustBye />}
                   </Table.Cell>
                 </Table.Row>
               ))}
