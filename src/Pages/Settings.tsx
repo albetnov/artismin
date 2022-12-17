@@ -5,6 +5,8 @@ import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
 import AdjustBye from "../Components/Settings/AdjustBye";
+import AdjustRules from "../Components/Settings/AdjustRules";
+import AdjustWelcome from "../Components/Settings/AdjustWelcome";
 import useAlert from "../Hooks/useAlert";
 import SettingsRepository from "../Repositories/SettingsRepository";
 import useSettingsStore from "../Store/SettingStore";
@@ -67,6 +69,19 @@ export default function Settings() {
     fetchSettings();
   };
 
+  const parseShowAdjust = (id: string) => {
+    switch (id) {
+      case "enable_bye":
+        return <AdjustBye />;
+      case "enable_rules":
+        return <AdjustRules />;
+      case "enable_welcome":
+        return <AdjustWelcome />;
+      default:
+        return <></>;
+    }
+  };
+
   return (
     <Layout>
       <Card>
@@ -98,7 +113,7 @@ export default function Settings() {
                       checked={item.value}
                       onChange={(e) => changeValue(item.id, e)}
                     />
-                    {item.id === "enable_bye" && <AdjustBye />}
+                    {parseShowAdjust(item.id)}
                   </Table.Cell>
                 </Table.Row>
               ))}
