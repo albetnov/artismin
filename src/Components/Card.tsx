@@ -10,10 +10,8 @@ export default function Card({ children }: CardProps) {
       borderRadius={10}
       padding={20}
       marginTop={30}
-      backgroundColor="#ffffff"
-      boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
       marginX="auto"
-      className="max-w-sm lg:max-w-none"
+      className="max-w-sm lg:max-w-none bg-white shadow-lg dark:bg-zinc-600"
     >
       {children}
     </EverGreenCard>

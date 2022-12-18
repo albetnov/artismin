@@ -73,38 +73,45 @@ export default function Login() {
   return (
     <Container padding={15}>
       <Pane maxWidth={450} marginX="auto">
-        <Heading size={700}>Artismin - Admin Dashboard for Artisans.</Heading>
-        <Text>Welcome back. Please enter you cresidentials.</Text>
+        <Heading size={700} className="dark:text-white">
+          Artismin - Admin Dashboard for Artisans.
+        </Heading>
+        <Text className="dark:text-white">Welcome back. Please enter you cresidentials.</Text>
         <Card
           marginTop={100}
           boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
           paddingX={10}
           paddingY={20}
           textAlign="left"
+          className="dark:shadow-lg"
         >
           {alert && (
             <Alert intent="warning" marginY={10}>
               {alert}
             </Alert>
           )}
-          <form onSubmit={loginHandler}>
+          <form onSubmit={loginHandler} className="dark:text-white">
             <TextInputField
-              label="Email Address"
+              label={<label className="dark:text-white">Email Address</label>}
               hint="Please enter your email address"
               required
               type="email"
               ref={emailRef}
               autoComplete="email"
+              className="dark:text-white dark:bg-zinc-500"
             />
             <TextInputField
-              label="Password"
+              label={<label className="dark:text-white">Password</label>}
               hint="Please enter your password"
               type="password"
               required
               ref={passwordRef}
               autoComplete="current-password"
+              className="dark:text-white dark:bg-zinc-500"
             />
-            <Button isLoading={isLoading}>Login</Button>
+            <Button isLoading={isLoading} className="dark:bg-zinc-600 dark:text-white">
+              Login
+            </Button>
           </form>
         </Card>
       </Pane>

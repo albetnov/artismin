@@ -5,7 +5,9 @@ import Question from "./Question";
 export default function QuestionAnswer() {
   return (
     <Card>
-      <Heading size={700}>Question and Answer</Heading>
+      <Heading size={700} className="dark:text-white">
+        Question and Answer
+      </Heading>
       <br />
       <Pane className="flex flex-col gap-10 lg:grid lg:grid-cols-3">
         <Question title="Why are some changes not live?">
@@ -13,9 +15,10 @@ export default function QuestionAnswer() {
           to the bot. This happen due to caching mechanism. And lucky enough that this only applies
           to: channels and roles as both of them didn&apos;t change frequently. The cache however
           will not revalidate by it&apos;s own. It&apos;s require server restart. But, this action
-          is not neccessary with the RefreshCache dev command. You can simply type <Code>/dev</Code>
-          and then <Code>Artisan:RefreshCache</Code> and the bot will revalidate the cache right
-          away. Luckily this behaviour can be triggered with Webhook.
+          is not neccessary with the RefreshCache dev command. You can simply type{" "}
+          <Code className="dark:text-white">/dev</Code>
+          and then <Code className="dark:text-white">Artisan:RefreshCache</Code> and the bot will
+          revalidate the cache right away. Luckily this behaviour can be triggered with Webhook.
         </Question>
         <Question title="Why i should avoid registering channel for autocomplete schedules?">
           I believe you will ask this question if you&apos;re seeing the alert of enabling same
@@ -50,14 +53,14 @@ export default function QuestionAnswer() {
           I can&apos;t guarantee if these feature will 100% come. As I got a lot things going on
           already. However I do have a plan for this in priority:
           <UnorderedList textAlign="left">
-            <ListItem>Cross Guild Feature</ListItem>
-            <ListItem>Webhook</ListItem>
-            <ListItem>Enable and Disable Feature (Flagging)</ListItem>
+            <ListItem className="dark:text-white">Cross Guild Feature</ListItem>
+            <ListItem className="dark:text-white">Webhook</ListItem>
+            <ListItem className="dark:text-white">Enable and Disable Feature (Flagging)</ListItem>
           </UnorderedList>
           And for the rest:
           <UnorderedList textAlign="left">
-            <ListItem>Add Ecchi Option</ListItem>
-            <ListItem>Allows send message directly</ListItem>
+            <ListItem className="dark:text-white">Add Ecchi Option</ListItem>
+            <ListItem className="dark:text-white">Allows send message directly</ListItem>
           </UnorderedList>
         </Question>
       </Pane>

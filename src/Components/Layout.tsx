@@ -120,24 +120,30 @@ export default function Layout({ children }: LayoutProps) {
           gap={20}
           alignItems="center"
           listStyle="none"
-          backgroundColor="#ffffff"
           padding={20}
           width="90%"
           marginX="auto"
           borderRadius={20}
           boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
-          className="hidden md:flex"
+          className="bg-white dark:bg-zinc-600 hidden md:flex"
         >
           <ListItem>
-            <Heading size={800}>Artismin</Heading>
+            <Heading size={800} className="dark:text-white">
+              Artismin
+            </Heading>
           </ListItem>
           {linksList.length <= 0 ? (
             <Loading />
           ) : (
             linksList.map((item, i) => (
               <ListItem key={i} display="flex" marginX="auto" alignItems="center" gap={3}>
-                <item.icon />
-                <Link to={item.route}>{item.name}</Link>
+                <item.icon className="dark:text-white" />
+                <Link
+                  to={item.route}
+                  className="dark:text-white transition-all delay-200 hover:underline"
+                >
+                  {item.name}
+                </Link>
               </ListItem>
             ))
           )}
@@ -174,13 +180,13 @@ export default function Layout({ children }: LayoutProps) {
       >
         {children}
         <Pane
-          backgroundColor="#F4F5F9"
           padding={15}
           borderRadius={15}
           marginX="auto"
           marginTop={10}
           textAlign="center"
           width="100%"
+          className="bg-white dark:bg-zinc-700 dark:text-white"
         >
           &copy; {new Date().getFullYear()} - Artismin by{" "}
           <a href="https://github.com/albetnov">Albet Novendo</a>

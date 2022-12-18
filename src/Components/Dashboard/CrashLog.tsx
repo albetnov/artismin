@@ -27,11 +27,11 @@ export default function CrashLog() {
 
   return (
     <Card>
-      <Heading>Latest Crash Log</Heading>
+      <Heading className="dark:text-white">Latest Crash Log</Heading>
       <br />
       <BasicModal
         isShown={openDetail}
-        title="Exception Detail"
+        title={<Heading className="dark:text-white">Exception Detail</Heading>}
         onCloseComplete={() => setOpenDetail(false)}
       >
         {details ? (
@@ -48,17 +48,32 @@ export default function CrashLog() {
         <Loading />
       ) : (
         <Table width="full">
-          <Table.Head>
-            <Table.TextHeaderCell>No.</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Message</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Details</Table.TextHeaderCell>
+          <Table.Head className="dark:bg-zinc-700">
+            <Table.TextHeaderCell textProps={{ className: "dark:text-white" }}>
+              No.
+            </Table.TextHeaderCell>
+            <Table.TextHeaderCell textProps={{ className: "dark:text-white" }}>
+              Message
+            </Table.TextHeaderCell>
+            <Table.TextHeaderCell textProps={{ className: "dark:text-white" }}>
+              Details
+            </Table.TextHeaderCell>
           </Table.Head>
           <Table.Body>
             {logs.map((item: DocumentData, id: number) => (
-              <Table.Row key={id} isSelectable onSelect={() => showDetail(id)}>
-                <Table.TextCell>{++id}</Table.TextCell>
-                <Table.TextCell>{item.message}</Table.TextCell>
-                <Table.TextCell>{item.details}</Table.TextCell>
+              <Table.Row
+                className="dark:bg-zinc-700 dark:border-none"
+                key={id}
+                isSelectable
+                onSelect={() => showDetail(id)}
+              >
+                <Table.TextCell textProps={{ className: "dark:text-white" }}>{++id}</Table.TextCell>
+                <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                  {item.message}
+                </Table.TextCell>
+                <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                  {item.details}
+                </Table.TextCell>
               </Table.Row>
             ))}
           </Table.Body>

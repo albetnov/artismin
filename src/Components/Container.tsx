@@ -9,11 +9,11 @@ export default function Container({ children, padding }: ContainerProps) {
   return (
     <Pane
       padding={padding}
-      backgroundColor="#F9FAFC"
       minHeight="100vh"
       marginX="auto"
       textAlign="center"
       maxWidth="full"
+      className="bg-slate-100 dark:bg-zinc-800"
     >
       {children}
     </Pane>
