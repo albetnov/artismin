@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Alert, Dialog, TextareaField, TextInputField } from "evergreen-ui";
+import { Alert, Dialog, Heading, Text, TextareaField, TextInputField } from "evergreen-ui";
 import Loading from "../Loading";
 import { EditProps } from "../../Utils/EditProps";
 import RoadmapRepository from "../../Repositories/RoadmapRepository";
@@ -55,9 +55,10 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
   return (
     <Dialog
       isShown={show}
-      title="Edit Roadmap"
+      title={<Heading className="dark:text-white">Edit Roadmap</Heading>}
       onConfirm={editRoadmapHandler}
       onCloseComplete={() => setShow(false)}
+      containerProps={{ className: "dark:bg-zinc-700" }}
     >
       {alert && <Alert intent="danger">{alert}</Alert>}
       {loading || !item ? (
@@ -65,51 +66,57 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
       ) : (
         <>
           <TextInputField
-            label="Title"
-            hint="Please enter the title"
+            label={<Text className="dark:text-white">Title</Text>}
+            hint={<Text className="dark:text-white">Please enter the title</Text>}
             required
             type="text"
             ref={titleRef}
             defaultValue={item.title}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Author name"
-            hint="Please enter the author name"
+            label={<Text className="dark:text-white">Author name</Text>}
+            hint={<Text className="dark:text-white">Please enter the author name</Text>}
             required
             type="text"
             ref={authorNameRef}
             defaultValue={item.author_name}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Author url"
-            hint="Please enter the author url"
+            label={<Text className="dark:text-white">Author url</Text>}
+            hint={<Text className="dark:text-white">Please enter the author url</Text>}
             required
             type="url"
             ref={authorUrlRef}
             defaultValue={item.author_url}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextareaField
-            label="Content"
-            hint="Enter the content"
+            label={<Text className="dark:text-white">Content</Text>}
+            hint={<Text className="dark:text-white">Enter the content</Text>}
             required
             ref={contentRef}
             defaultValue={item.content}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="image"
-            hint="Please enter the image url"
+            label={<Text className="dark:text-white">image</Text>}
+            hint={<Text className="dark:text-white">Please enter the image url</Text>}
             required
             type="url"
             ref={imageRef}
             defaultValue={item.image}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Author footer"
-            hint="Please enter the footer content"
+            label={<Text className="dark:text-white">Author footer</Text>}
+            hint={<Text className="dark:text-white">Please enter the footer content</Text>}
             required
             type="text"
             ref={footerRef}
             defaultValue={item.footer}
+            className="dark:bg-zinc-500 dark:text-white"
           />
         </>
       )}

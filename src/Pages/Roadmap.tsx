@@ -21,7 +21,11 @@ export default function Roadmap() {
 
   return (
     <CommonPageBase heading="Manage Roadmaps" description="Add new roadmap entry to the bot">
-      <Button marginY={10} onClick={() => setShowCreate(true)}>
+      <Button
+        className="dark:bg-slate-500 dark:text-white"
+        marginY={10}
+        onClick={() => setShowCreate(true)}
+      >
         Add Roadmap
       </Button>
       <Create show={showCreate} setShow={setShowCreate} refetch={fetchRoadmap} />

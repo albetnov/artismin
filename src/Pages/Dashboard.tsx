@@ -7,7 +7,7 @@ import Layout from "../Components/Layout";
 export default function Dashboard() {
   return (
     <Layout>
-      <Heading size={800} paddingTop={20}>
+      <Heading className="dark:text-white" size={800} paddingTop={20}>
         Dashboard
       </Heading>
       <Pane paddingX={10}>

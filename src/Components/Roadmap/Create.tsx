@@ -1,4 +1,4 @@
-import { Alert, Dialog, TextareaField, TextInputField } from "evergreen-ui";
+import { Alert, Dialog, Heading, Text, TextareaField, TextInputField } from "evergreen-ui";
 import { useRef, useState } from "react";
 import RoadmapRepository from "../../Repositories/RoadmapRepository";
 import { CreateProps } from "../../Utils/CreateProps";
@@ -66,9 +66,10 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
   return (
     <Dialog
       isShown={show}
-      title="Create Roadmap"
+      title={<Heading className="dark:text-white">Create Roadmap</Heading>}
       onConfirm={createRoadmapHandler}
       onCloseComplete={() => setShow(false)}
+      containerProps={{ className: "dark:bg-zinc-700" }}
     >
       {alert && <Alert intent="danger">{alert}</Alert>}
       {loading ? (
@@ -80,47 +81,61 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
             identifier.
           </Alert>
           <TextInputField
-            label="Identifier"
-            hint="Please enter the command to call this roadmap"
+            label={<Text className="dark:text-white">Identifier</Text>}
+            hint={
+              <Text className="dark:text-white">Please enter the command to call this roadmap</Text>
+            }
             required
             type="text"
             ref={idRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Title"
-            hint="Please enter the title"
+            label={<Text className="dark:text-white">Title</Text>}
+            hint={<Text className="dark:text-white">Please enter the title</Text>}
             required
             type="text"
             ref={titleRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Author name"
-            hint="Please enter the author name"
+            label={<Text className="dark:text-white">Author name</Text>}
+            hint={<Text className="dark:text-white">Please enter the author name</Text>}
             required
             type="text"
             ref={authorNameRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Author url"
-            hint="Please enter the author url"
+            label={<Text className="dark:text-white">Author url</Text>}
+            hint={<Text className="dark:text-white">Please enter the author url</Text>}
             required
             type="url"
             ref={authorUrlRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
-          <TextareaField label="Content" hint="Enter the content" required ref={contentRef} />
+          <TextareaField
+            label={<Text className="dark:text-white">Content</Text>}
+            hint={<Text className="dark:text-white">Enter the content</Text>}
+            required
+            ref={contentRef}
+            className="dark:bg-zinc-500 dark:text-white"
+          />
           <TextInputField
-            label="image"
-            hint="Please enter the image url"
+            label={<Text className="dark:text-white">image</Text>}
+            hint={<Text className="dark:text-white">Please enter the image url</Text>}
             required
             type="url"
             ref={imageRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Author footer"
-            hint="Please enter the footer content"
+            label={<Text className="dark:text-white">Author footer</Text>}
+            hint={<Text className="dark:text-white">Please enter the footer content</Text>}
             required
             type="text"
             ref={footerRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
         </>
       )}

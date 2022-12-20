@@ -40,7 +40,7 @@ export default function List({ data, refetch }: ListProps) {
       <Table width="fit-content">
         <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
         <Detail item={current} show={openDetail} setShow={setOpenDetail} />
-        <Table.Head>
+        <Table.Head className="dark:bg-zinc-700 dark:text-white">
           <Table.TextHeaderCell>No</Table.TextHeaderCell>
           <Table.TextHeaderCell>Command</Table.TextHeaderCell>
           <Table.TextHeaderCell>Author Name</Table.TextHeaderCell>
@@ -50,21 +50,39 @@ export default function List({ data, refetch }: ListProps) {
         </Table.Head>
         <Table.Body>
           {data.map((item: DocumentData, no: number) => (
-            <Table.Row key={item.id} isSelectable onSelect={() => detailRoadmapHandler(no - 1)}>
-              <Table.TextCell>{++no}</Table.TextCell>
-              <Table.TextCell>{item.id}</Table.TextCell>
-              <Table.TextCell>{item.author_name}</Table.TextCell>
-              <Table.TextCell>
+            <Table.Row
+              className="dark:bg-zinc-700"
+              key={item.id}
+              isSelectable
+              onSelect={() => detailRoadmapHandler(no - 1)}
+            >
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>{++no}</Table.TextCell>
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                {item.id}
+              </Table.TextCell>
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                {item.author_name}
+              </Table.TextCell>
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>
                 {item.author_url.length > 20
                   ? item.author_url.substring(0, 20) + "..."
                   : item.author_url}
               </Table.TextCell>
-              <Table.TextCell>{item.title}</Table.TextCell>
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                {item.title}
+              </Table.TextCell>
               <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
-                <Button onClick={() => editRoadmapHandler(no - 1)}>
+                <Button
+                  className="dark:bg-zinc-500 dark:text-white"
+                  onClick={() => editRoadmapHandler(no - 1)}
+                >
                   <FiEdit fontSize={100} />
                 </Button>
-                <Button intent="danger" onClick={() => deleteRoadmapHandler(item.id)}>
+                <Button
+                  className="dark:bg-zinc-500 dark:text-white"
+                  intent="danger"
+                  onClick={() => deleteRoadmapHandler(item.id)}
+                >
                   <FiTrash fontSize={100} />
                 </Button>
               </Table.Cell>
