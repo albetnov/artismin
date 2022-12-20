@@ -21,11 +21,15 @@ export default function Channels() {
 
   return (
     <CommonPageBase heading="Manage Channels" description="Register channel to bot kernels.">
-      <Button marginY={10} onClick={() => setShowCreate(true)}>
+      <Button
+        marginY={10}
+        className="dark:bg-slate-500 dark:text-white"
+        onClick={() => setShowCreate(true)}
+      >
         Add Channel
       </Button>
       <Create show={showCreate} refetch={fetchChannel} setShow={setShowCreate} />
-      <hr />
+      <hr className="mb-5 dark:border-white" />
       <List data={channels} refetch={fetchChannel} />
     </CommonPageBase>
   );

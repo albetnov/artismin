@@ -1,4 +1,4 @@
-import { Alert, Dialog, TextInputField } from "evergreen-ui";
+import { Alert, Dialog, Heading, Text, TextInputField } from "evergreen-ui";
 import { useRef, useState } from "react";
 import ChannelRepository from "../../Repositories/ChannelRepository";
 import { CreateProps } from "../../Utils/CreateProps";
@@ -32,9 +32,10 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
   return (
     <Dialog
       isShown={show}
-      title="Create Channel"
+      title={<Heading className="dark:text-white">Create Channel</Heading>}
       onConfirm={createChannelHandler}
       onCloseComplete={() => setShow(false)}
+      containerProps={{ className: "dark:bg-zinc-700" }}
     >
       {alert && <Alert intent="danger">{alert}</Alert>}
       {loading ? (
@@ -42,16 +43,18 @@ export default function Create({ show, setShow, refetch }: CreateProps) {
       ) : (
         <>
           <TextInputField
-            label="Channel name"
-            hint="Please enter your channel name"
+            label={<Text className="dark:text-white">Channel name</Text>}
+            hint={<Text className="dark:text-white">Please enter your channel name</Text>}
             required
             type="text"
             ref={nameRef}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Channel ID"
-            hint="Please enter your channel ID"
+            label={<Text className="dark:text-white">Channel ID</Text>}
+            hint={<Text className="dark:text-white">Please enter your channel ID</Text>}
             required
+            className="dark:bg-zinc-500 dark:text-white"
             type="text"
             ref={idRef}
           />

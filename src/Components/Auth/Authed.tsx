@@ -68,7 +68,11 @@ export default function Authed({ redirect = false }: AuthedProps) {
   }, [isAuthed]);
 
   if (isAuthed === null) {
-    return <Loading />;
+    return (
+      <div className="h-screen fixed dark:bg-zinc-800 w-full">
+        <Loading />
+      </div>
+    );
   }
 
   return <Outlet />;

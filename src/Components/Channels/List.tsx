@@ -40,7 +40,7 @@ export default function List({ data, refetch }: ListProps) {
       <Table width="fit-content">
         <Edit refetch={refetch} item={current} setShow={setOpenEdit} show={openEdit} />
         <Detail item={current} show={openDetail} setShow={setOpenDetail} />
-        <Table.Head>
+        <Table.Head className="dark:bg-zinc-700 dark:text-white">
           <Table.TextHeaderCell>No</Table.TextHeaderCell>
           <Table.TextHeaderCell>Channel Name</Table.TextHeaderCell>
           <Table.TextHeaderCell>Channel ID</Table.TextHeaderCell>
@@ -48,15 +48,31 @@ export default function List({ data, refetch }: ListProps) {
         </Table.Head>
         <Table.Body>
           {data.map((item: DocumentData, no: number) => (
-            <Table.Row key={item.id} isSelectable onSelect={() => detailChannelHandler(no - 1)}>
-              <Table.TextCell>{++no}</Table.TextCell>
-              <Table.TextCell>{item.name}</Table.TextCell>
-              <Table.TextCell>{item.value}</Table.TextCell>
+            <Table.Row
+              className="dark:bg-zinc-700"
+              key={item.id}
+              isSelectable
+              onSelect={() => detailChannelHandler(no - 1)}
+            >
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>{++no}</Table.TextCell>
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                {item.name}
+              </Table.TextCell>
+              <Table.TextCell textProps={{ className: "dark:text-white" }}>
+                {item.value}
+              </Table.TextCell>
               <Table.Cell display="flex" gap={10} onClick={(e: MouseEvent) => e.stopPropagation()}>
-                <Button onClick={() => editChannelHandler(no - 1)}>
+                <Button
+                  className="dark:bg-zinc-500 dark:text-white"
+                  onClick={() => editChannelHandler(no - 1)}
+                >
                   <FiEdit fontSize={50} />
                 </Button>
-                <Button intent="danger" onClick={() => deleteChannelHandler(item.id)}>
+                <Button
+                  className="dark:bg-zinc-500 dark:text-white"
+                  intent="danger"
+                  onClick={() => deleteChannelHandler(item.id)}
+                >
                   <FiTrash fontSize={50} />
                 </Button>
               </Table.Cell>

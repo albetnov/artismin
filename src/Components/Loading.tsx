@@ -4,7 +4,9 @@ export default function Loading() {
   return (
     <>
       <Spinner marginX="auto" />
-      <Text textAlign="center">Cotto matte</Text>
+      <Text textAlign="center" className="dark:text-white">
+        Cotto matte
+      </Text>
     </>
   );
 }

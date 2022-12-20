@@ -12,8 +12,10 @@ export default function CommonPageBase({ heading, description, children }: Commo
   return (
     <Layout>
       <Card>
-        <Heading size={600}>{heading}</Heading>
-        <Text>{description}</Text> <br />
+        <Heading size={600} className="dark:text-white">
+          {heading}
+        </Heading>
+        <Text className="dark:text-white">{description}</Text> <br />
         {children}
       </Card>
     </Layout>

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ChannelRepository from "../../Repositories/ChannelRepository";
-import { Alert, Dialog, TextInputField } from "evergreen-ui";
+import { Alert, Dialog, Heading, Text, TextInputField } from "evergreen-ui";
 import Loading from "../Loading";
 import { EditProps } from "../../Utils/EditProps";
 
@@ -32,9 +32,10 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
   return (
     <Dialog
       isShown={show}
-      title="Edit Channel"
+      title={<Heading className="dark:text-white">Edit Channel</Heading>}
       onConfirm={editChannelHandler}
       onCloseComplete={() => setShow(false)}
+      containerProps={{ className: "dark:bg-zinc-700" }}
     >
       {alert && <Alert intent="danger">{alert}</Alert>}
       {loading || !item ? (
@@ -42,20 +43,22 @@ export default function Edit({ show, setShow, refetch, item }: EditProps) {
       ) : (
         <>
           <TextInputField
-            label="Channel name"
-            hint="Please enter your channel name"
+            label={<Text className="dark:text-white">Channel name</Text>}
+            hint={<Text className="dark:text-white">Please enter your channel name</Text>}
             required
             type="text"
             ref={nameRef}
             defaultValue={item.name}
+            className="dark:bg-zinc-500 dark:text-white"
           />
           <TextInputField
-            label="Channel ID"
-            hint="Please enter your channel ID"
+            label={<Text className="dark:text-white">Channel ID</Text>}
+            hint={<Text className="dark:text-white">Please enter your channel id</Text>}
             required
             type="text"
             ref={idRef}
             defaultValue={item.value}
+            className="dark:bg-zinc-500 dark:text-white"
           />
         </>
       )}
