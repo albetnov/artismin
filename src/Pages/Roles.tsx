@@ -21,7 +21,9 @@ export default function Roles() {
 
   return (
     <CommonPageBase heading="Manage Roles" description="Register roles to bot kernels.">
-      <Button marginY={10} onClick={() => setShowCreate(true)}>
+      <Button
+          className="dark:bg-slate-500 dark:text-white"
+          marginY={10} onClick={() => setShowCreate(true)}>
         Add Role
       </Button>
       <Create show={showCreate} setShow={setShowCreate} refetch={fetchRole} />
